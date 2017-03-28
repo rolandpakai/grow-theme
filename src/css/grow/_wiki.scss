@@ -92,14 +92,10 @@
 		}
 	}
 
-	@media (max-width: $screen-sm-min) {
-		.wiki-actions {
-			margin-left: -110px;
-    		margin-top: -290px;
-		}
-	}
-
 	.wiki-actions {
+		margin-left: -45px;
+		margin-top: -400px;
+
 		@include sm() {
 			margin-left: -60px;
 			margin-top: 25px;	
