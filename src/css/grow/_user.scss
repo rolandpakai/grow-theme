@@ -36,6 +36,10 @@
 	.sign-in > a {
 		line-height: 28px;
 		padding: 15px 4px;
+
+		@include sm {
+			padding: 18px 0;
+		}
 	}
 
 	.user-avatar-image {
