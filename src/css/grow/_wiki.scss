@@ -76,7 +76,11 @@
 
 	.sidenav-content {
 		.content {
-			margin-left: 50px;
+			margin-left: 10px;
+
+			@include sm() {
+				margin-left: 50px;	
+			}
 
 			h4 {
 				margin-left: 15px;
@@ -84,11 +88,19 @@
 		}
 
 		> h4 {
-			margin-left: 60px;
+			margin-left: 25px;
+
+			@include sm() {
+				margin-left: 60px;	
+			}
 		}
 
 		> div:last-child {
-			margin-left: 60px;
+			margin-left: 25px;
+
+			@include sm() {
+				margin-left: 60px;	
+			}
 		}
 	}
 
