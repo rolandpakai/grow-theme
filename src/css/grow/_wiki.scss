@@ -227,6 +227,12 @@
 
 	.wiki-body {
 		padding: 10px 0 10px 50px !important;
+
+		ol, ul {
+			li {
+				color: $wiki-list-color
+			} 
+		}
 	}
 }
 
