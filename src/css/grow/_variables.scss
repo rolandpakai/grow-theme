@@ -1,15 +1,16 @@
-$complementary-color: #365D9E;
+$complementary-color: #03A9F4;
 $solid-color: $complementary-color;
 
-$product-menu-body-bg: #18272E !default;
+$product-menu-body-bg: #01579b !default;
 
 $product-menu-collapse-icon-bg: #1A2126 !default;
 
-$product-menu-header-bg: #333 !default;
-$product-menu-header-border: #26363F !default;
-$product-menu-header-color: #FFF !default;
-$product-menu-header-link-color: #FFF !default;
+$product-menu-header-bg: #01579b !default;
+$product-menu-header-border: #e1f5fe !default;
+$product-menu-header-color: #e1f5fe !default;
+$product-menu-header-link-color: #01579b !default;
 $product-menu-header-link-hover-color: $product-menu-header-link-color !default;
+$product-menu-nav-link-active-color: #ffb300;
 
 $product-menu-list-group-heading-bg: transparent !default;
 $product-menu-list-group-heading-border: transparent !default;
@@ -30,11 +31,11 @@ $product-menu-list-group-item-border-width: 0 !default;
 $product-menu-nav-equal-height-heading-closed-collapse-icon: '\f0fe' !default;
 $product-menu-nav-equal-height-heading-open-collapse-icon: '\f146' !default;
 
-$product-menu-nav-link-active-color: #FFF !default;
-$product-menu-nav-link-color: #869CAD !default;
+$product-menu-nav-link-active-color: #ffb300 !default;
+$product-menu-nav-link-color: #01579b !default;
 
-$product-menu-panel-body-bg: #213740 !default;
-$product-menu-panel-title-active-bg: #3A4D5A !default;
+$product-menu-panel-body-bg: #FFF !default;
+$product-menu-panel-title-active-bg: #01579b !default;
 $product-menu-panel-title-active-border: #65B6F0 !default;
 $product-menu-panel-title-active-border-bottom-width: 2px;
 $product-menu-panel-title-active-border-left-width: 4px;
@@ -42,14 +43,14 @@ $product-menu-panel-title-active-border-style: solid;
 $product-menu-panel-title-color: #FFF !default;
 
 $product-menu-site-administration-color: #FFF !default;
-$product-menu-site-administration-link-active-bg: #3A4D5A !default;
+$product-menu-site-administration-link-active-bg: #01579b !default;
 $product-menu-site-administration-link-active-border-radius: 4px !default;
-$product-menu-site-administration-link-active-color: #88C37C !default;
+$product-menu-site-administration-link-active-color: #65B6F0 !default;
 $product-menu-site-administration-link-color: $product-menu-nav-link-color !default;
 
-$product-menu-tree-active-bg: #3A4D5A;
-$product-menu-tree-active-border: #FFF;
-$product-menu-tree-active-color: #FFF;
+$product-menu-tree-active-bg: #01579b;
+$product-menu-tree-active-border: #e1f5fe;
+$product-menu-tree-active-color: #e1f5fe;
 $product-menu-tree-active-hitarea-bg: #FFF;
 
 $product-menu-tree-border: #869CAD;
@@ -66,7 +67,7 @@ $product-menu-width: 320px !default;
 $product-menu-zindex: 1035 !default;
 
 $table-cells-padding: 8px;
-$table-stripes-color: #f9f9f9;
+$table-stripes-color: #e1f5fe;
 
-$wiki-heading-color: #060606;
-$wiki-list-color: #2b4259;
+$wiki-heading-color: #e1f5fe;
+$wiki-list-color: #000;

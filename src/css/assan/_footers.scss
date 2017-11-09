@@ -3,9 +3,8 @@
 /**footet dark**/
 #footer {
 
-    background: #111;
-    font-size: 0.9em;
-    padding: 80px 0 0;
+    background: $secondcolor;
+    font-size: 16px;
     position: relative;
     clear: both;
 }
@@ -60,7 +59,7 @@
 .footer-btm{
     margin-top: 30px;
     padding: 20px;
-    background-color: #0c0c0c;
+    background-color: $secondcolor;
     border-top-left-radius: 6px;
     border-top-right-radius:6px; 
 }

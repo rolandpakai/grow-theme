@@ -6,7 +6,15 @@
     Version    : V2.3
 */
 
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,300italic,400italic,600,700,900);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,200,300,300italic,400italic,600,700,900);
+
+@import "_mixins";
+@import "_variables";
+@import "_base.scss";
+@import "_header.scss";
+@import "_footers.scss";
+
+
 
 .fullwidthbanner{
     width:100%;
@@ -16,12 +24,12 @@
     text-align: center;
     font-size: 24px;
     color:#fff !important;
-    font-family: 'Source Sans Pro', sans-serif !important;
+    font-family: $primary-font !important;
     font-weight: 300;
    line-height: 30px;
 }
 .rev-title-v1{
-  font-family: 'Source Sans Pro', sans-serif !important;
+  font-family: $primary-font !important;
    font-weight: 700 ;
    text-transform: uppercase;
 }
@@ -36,7 +44,7 @@
     color:#333;
 }
 .tp-caption.modern_big_redbg{
-      font-family: 'Source Sans Pro', sans-serif !important; 
+      font-family: $primary-font !important; 
       font-weight: 300;
 }
 .slider-text-title{
@@ -48,14 +56,14 @@
     font-size: 45px;
     color:#fff;
     text-transform: uppercase;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font;
 }
 .lowercase-caption{
     font-weight: 400;
     font-size: 20px;
     color:#fff;
     line-height: 26px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font;
 }
 /************box slider*******/
 .tp-banner-container{
@@ -71,13 +79,13 @@
     color:#fff;
     font-weight:700;
     text-transform: uppercase;
-      font-family: 'Source Sans Pro', sans-serif!important; 
+      font-family: $primary-font !important; 
 }
 .ken-burns-cap{
     color:#fff;
     font-weight: 400;
     font-size: 18px;
-    font-family: 'Source Sans Pro', sans-serif ;
+    font-family: $primary-font
 }
 
 
@@ -88,13 +96,13 @@ font-size: 48px;
 line-height: 56px;
 font-weight: 900;
 text-transform: uppercase;
- font-family: 'Source Sans Pro', sans-serif;
+ font-family: $primary-font
 }
 .caption.text{
     font-size: 16px;
     font-weight: 300;
     color:#fff;
-     font-family: 'Source Sans Pro', sans-serif;
+     font-family: $primary-font
 }
 .caption.title {
 color: #fff;
@@ -102,7 +110,7 @@ font-size: 72px;
 line-height: 85px;
 font-weight: 700;
 text-transform: uppercase;
-font-family: 'Source Sans Pro', sans-serif;
+font-family: $primary-font
 }
 .caption.subtitle {
 padding-left: 25px;
@@ -111,13 +119,13 @@ color: #fff;
 font-size: 24px;
 line-height: 33px;
 text-transform: uppercase;
-font-family: 'Source Sans Pro', sans-serif;
+font-family: $primary-font
 }
 .revo-slider-emphasis-text {
 font-size: 64px;
 font-weight: 700;
 letter-spacing: -1px;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: $primary-font
 
 }
 
@@ -125,14 +133,14 @@ letter-spacing: -1px;
 font-size: 16px;
 font-weight: 400;
 letter-spacing: 3px;
-font-family: 'Source Sans Pro', sans-serif;
+font-family: $primary-font
 }
 
 /***shop slide****/
 .shop-slide-heading{
     color:#fff;
     font-size: 45px;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: $primary-font;
       font-weight: 700;
       text-transform: uppercase;
 }
@@ -150,10 +158,10 @@ font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     border-radius: 50%;
     -webkit-border-radius: 50%;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font
 }
 .modern_big_bluebg{
- font-family: 'Source Sans Pro', sans-serif !important;  
+ font-family: $primary-font !important;  
  text-transform: uppercase;
 }
 
@@ -163,14 +171,14 @@ font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 60px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font
 }
 .text-center-btm{
     color:#fff;
     font-size: 20px;
     font-weight: 300;
     line-height:34px !important;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font
 
 }
 .left-tile-text{
@@ -178,7 +186,7 @@ font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 50px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font
 }
 
 
@@ -188,11 +196,11 @@ font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 60px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: $primary-font
 }
 .vertical-caption{
     color:#fff;
     font-size: 20px;
     font-weight: 300;
-     font-family: 'Source Sans Pro', sans-serif;
+     font-family: $primary-font
 }

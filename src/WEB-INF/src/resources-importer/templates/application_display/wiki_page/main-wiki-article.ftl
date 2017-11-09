@@ -57,7 +57,7 @@
 					<@getRatings/>
 				</ul>
 			</div>
-			<h4 class="text-default">${entry.getTitle()}</h4>
+			<h1 class="text-default">${entry.getTitle()}</h1>
 			<ul class="list-inline post-detail">
 				<li><span class="glyphicon glyphicon-user"></span> updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${entry.getStatusByUserName()}</a></li>
 				<li><span class="glyphicon glyphicon-calendar"></span> ${assetEntry.getModifiedDate()?date}</li>
