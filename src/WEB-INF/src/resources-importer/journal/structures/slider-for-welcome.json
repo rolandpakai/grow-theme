@@ -124,30 +124,6 @@
                 },
                 {
                     "label": {
-                        "en_US": "Background"
-                    },
-                    "predefinedValue": {
-                        "en_US": ""
-                    },
-                    "style": {
-                        "en_US": ""
-                    },
-                    "tip": {
-                        "en_US": ""
-                    },
-                    "dataType": "image",
-                    "fieldNamespace": "ddm",
-                    "indexType": "keyword",
-                    "localizable": true,
-                    "name": "Background",
-                    "readOnly": false,
-                    "repeatable": false,
-                    "required": true,
-                    "showLabel": true,
-                    "type": "ddm-image"
-                },
-                {
-                    "label": {
                         "en_US": "Link"
                     },
                     "predefinedValue": {
