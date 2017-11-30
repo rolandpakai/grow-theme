@@ -18,7 +18,7 @@
                 <h1 class="caption tp-resizeme tp-caption start" style="color: white;"  data-x="80" data-y="100" data-speed="400" data-start="1800" data-easing="Sine.easeOut">
                     ${entries.Description.getData()}
                 </h1>
-                <div class="caption sfb rev-buttons tp-resizeme" data-x="500" data-y="350" data-speed="500" data-start="2100" data-easing="Sine.easeeOut">
+                <div class="caption sfb rev-buttons tp-resizeme" data-x="500" data-y="350" data-speed="500" data-start="2100" data-easing="Sine.easeOut">
                     <a href="${link}" class="btn btn-primary btn-lg">Read more ....</a>
                 </div>
             </li>
