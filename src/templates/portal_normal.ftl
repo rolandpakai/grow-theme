@@ -64,7 +64,7 @@
 						</#if>
 					</div>
 
-					<#include "${full_templates_path}/navigation.ftl" />
+					<#include "${full_templates_path}/gsearch_navigation.ftl" />
 				</div>
 			</header>
 
