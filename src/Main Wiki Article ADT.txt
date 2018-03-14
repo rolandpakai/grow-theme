@@ -7,6 +7,29 @@
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
 	});
 	</script>
+
+	<#-- GROW-503 -->
+		<#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
+
+		<#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
+
+		<div>
+			${contributors}
+		</div>
+	---------------------
+
+		<#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
+		<div>
+			${parentPage}
+		</div>
+	------------------------
+
+		<#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
+
+		<div>
+			${childPages}
+		</div>
+	<#-- GROW-503 -->
 	
 	<#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
 
