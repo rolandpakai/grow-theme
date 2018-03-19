@@ -6,61 +6,53 @@
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
 	});
-	</script>
+</script>
+<#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
+<#assign JSONFactoryUtil = serviceLocator.findService("com.liferay.portal.kernel.json.JSONFactoryUtil")>
 
-	<#-- GROW-503 -->
-		<#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
+<#assign data = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
 
-		<#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
+<#assign contributors = JSONFactoryUtil.looseDeserialize(data.contributors)>
 
-		<div>
-			${contributors}
-		</div>
-	---------------------
+<#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
 
-		<#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
-		<div>
-			${parentPage}
-		</div>
-	------------------------
+<#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 
-		<#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
+<#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 
-		<div>
-			${childPages}
-		</div>
-	<#-- GROW-503 -->
-	
-	<#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
+<#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
+<script>
+console.log(${data});
+console.log(${childPages});
+</script>
+<#assign availableTasks = TaskHandler.getAvailableFlags(entry.getPageId())>
 
-	<#assign availableTasks = TaskHandler.getAvailableFlags(entry.getPageId())>
- 
-	<#assign wikiPageClassName = "com.liferay.wiki.model.WikiPage" >
-	<#assign wikiNodeClassName = "com.liferay.wiki.model.WikiNode" >
-	<#assign serviceContext = staticUtil["com.liferay.portal.kernel.service.ServiceContextThreadLocal"].getServiceContext()>
-	<#assign httpServletRequest = serviceContext.getRequest()>
-	<#assign pubFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.public.servlet.mapping")>
-	<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")>
-	<#assign UserLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.UserLocalService")>
-	<#assign AssetTagLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetTagLocalService")>
-	<#assign AssetCategoryLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetCategoryLocalService")>
-	<#assign SubscriptionLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.SubscriptionLocalService")>
-	<#assign isSubscribedPage = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiPageClassName, entry.getResourcePrimKey())>
-	<#assign isSubscribedWiki = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiNodeClassName, entry.getNodeId())>
-	<#assign tags = AssetTagLocalService.getAssetEntryAssetTags(assetEntry.getEntryId())>
-	<#assign categories = AssetCategoryLocalService.getAssetEntryAssetCategories(assetEntry.getEntryId())>
-	<#assign creatorUser = UserLocalService.getUser(assetEntry.getUserId())>
-	<#assign modifierUser = UserLocalService.getUser(entry.getStatusByUserId())>
-	<#assign renderURL = renderResponse.createRenderURL()>
-	<#assign assetRenderer = assetEntry.getAssetRenderer() />
-	<#assign portalURL = portal.getPortalURL(httpServletRequest)>
-	<#assign siteFriendlyURL = themeDisplay.getSiteGroup().getFriendlyURL()>
-	<#assign pageFriendlyURL = themeDisplay.getLayout().getFriendlyURL()>
-	<#if entry.getParentPage()?has_content>
-		<#assign parentTitle = entry.getParentPage().getTitle()>
-	</#if>
+<#assign wikiPageClassName = "com.liferay.wiki.model.WikiPage" >
+<#assign wikiNodeClassName = "com.liferay.wiki.model.WikiNode" >
+<#assign serviceContext = staticUtil["com.liferay.portal.kernel.service.ServiceContextThreadLocal"].getServiceContext()>
+<#assign httpServletRequest = serviceContext.getRequest()>
+<#assign pubFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.public.servlet.mapping")>
+<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")>
+<#assign UserLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.UserLocalService")>
+<#assign AssetTagLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetTagLocalService")>
+<#assign AssetCategoryLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetCategoryLocalService")>
+<#assign SubscriptionLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.SubscriptionLocalService")>
+<#assign isSubscribedPage = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiPageClassName, entry.getResourcePrimKey())>
+<#assign isSubscribedWiki = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiNodeClassName, entry.getNodeId())>
+<#assign tags = AssetTagLocalService.getAssetEntryAssetTags(assetEntry.getEntryId())>
+<#assign categories = AssetCategoryLocalService.getAssetEntryAssetCategories(assetEntry.getEntryId())>
+<#assign creatorUser = UserLocalService.getUser(assetEntry.getUserId())>
+<#assign modifierUser = UserLocalService.getUser(entry.getStatusByUserId())>
+<#assign renderURL = renderResponse.createRenderURL()>
+<#assign assetRenderer = assetEntry.getAssetRenderer() />
+<#assign portalURL = portal.getPortalURL(httpServletRequest)>
+<#assign siteFriendlyURL = themeDisplay.getSiteGroup().getFriendlyURL()>
+<#assign pageFriendlyURL = themeDisplay.getLayout().getFriendlyURL()>
+<#if entry.getParentPage()?has_content>
+	<#assign parentTitle = entry.getParentPage().getTitle()>
+</#if>
 	<div class="row wiki-body">
-		<div class="col-md-12 wiki-content">
+		<div class="col-md-8 wiki-content">
 			<div class="wiki-actions">
 				<ul class="list-unstyled">
 					<li><@displayEditLink/></li>
@@ -90,9 +82,9 @@
 			</h1>
 			<ul class="list-inline post-detail">
 				<li><span class="glyphicon glyphicon-user"></span> updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${entry.getStatusByUserName()}</a></li>
-				<li><span class="glyphicon glyphicon-calendar"></span> ${assetEntry.getModifiedDate()?date}</li>
+				<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>
 				<#if categories?has_content>
-					<li><span class="glyphicon glyphicon-tag"> </span> 
+					<li><span class="glyphicon glyphicon-tag"> </span>
 						 <#list categories as category>
 							<@displayCategory
 								 category=category
@@ -101,7 +93,7 @@
 					</li>
 				</#if>
 				<#if tags?has_content>
-					<li><span class="glyphicon glyphicon-tags"> </span> 
+					<li><span class="glyphicon glyphicon-tags"> </span>
 						<#list tags as tag>
 							<@displayTag
 					    		tag=tag
@@ -112,6 +104,65 @@
 				<li><span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}</li>
 			</ul>
 			${formattedContent}
+		</div>
+		<div class="col-md-4 asideInfo">
+		    <h4 class="sidebar-title">Information</h4>
+		    <ul class="list-unstyled categories">
+		        <li>
+		            <#if parentPage.title?has_content>
+    		            <li>ParentPage:</li>
+    		            <ul class="list-unstyled">
+    		                <li><@displayURL name=parentPage.title /></li>
+    		            </ul>
+		            </#if>
+		        </li>
+		        <li>
+		            <#if childPagesList?size != 0>
+        	            <li>ChildPages(${childPages.childPagesCount}):</li>
+        	            <ul class="list-unstyled">
+        	                <#list childPagesList as childPage>
+        	                    <li><@displayURL name=childPage.title /></li>
+        	                </#list>
+        	            </ul>
+		            </#if>
+		        </li>
+		        <li>
+		            <li>Author:</li>
+		            <ul class="list-unstyled">
+    		            <li><@displayUserURL name=data.author /></li>
+		            </ul>
+		        </li>
+		        <li>
+		            <#if contributors?size != 0>
+        	            <li>Contributors:</li>
+        	            <ul class="list-unstyled">
+        	                <#list contributors as contributor>
+        	                    <li><@displayContributorURL name=contributor /></li>
+        	                </#list>
+        	            </ul>
+		            </#if>
+		        </li>
+		        <li>
+		        <#if tags?has_content>
+    		        <li><span class="glyphicon glyphicon-tags"> </span></li>
+		            <ul class="list-unstyled">
+                        <li>
+                            <#list tags as tag>
+        						<@displayTag
+        					    	tag=tag
+        						/>
+        					</#list>
+    					</li>
+    				</ul>
+    			</#if>
+		        </li>
+		        <li>
+		            <li><span class="glyphicon glyphicon-eye-open"></span></li>
+		            <ul class="list-unstyled">
+                        <li>${assetEntry.getViewCount()}</li>
+                    </ul>
+		        </li>
+		    </ul>
 		</div>
 	</div>
 <#if entry.getAttachmentsFileEntriesCount() gt 0>
@@ -145,6 +196,26 @@
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
 	<a class="btn btn-default btn-block" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-link"> </span></a>
+</#macro>
+<#macro displayURL
+	name
+>
+	<#assign wikiTitle = getNormalizedWikiName(name)>
+	<a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name} <span class="glyphicon glyphicon-link"> </span></a>
+</#macro>
+<#macro displayUserURL
+	name
+>
+	<#assign wikiTitle = getNormalizedWikiName(name.userSreenName)>
+	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userSreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
+</#macro>
+<#macro displayContributorURL
+    name
+>
+<#assign date = name.date>
+
+	<#assign wikiTitle = getNormalizedWikiName(name.userSreenName)>
+	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userSreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${date}</a>
 </#macro>
 <#macro displayPageDetails>
 	<#assign viewPageDetailsURL = renderResponse.createRenderURL() />
@@ -241,7 +312,7 @@
 
 <#macro getRatings>
 	<@liferay_ui["ratings"]
-		className=wikiPageClassName	
+		className=wikiPageClassName
 		classPK=entry.getResourcePrimKey()
 	/>
 </#macro>
@@ -272,7 +343,7 @@
 		${subscribeURL.setParameter("cmd", "subscribe")}
 		${subscribeURL.setParameter("redirect", currentURL)}
 		${subscribeURL.setParameter("nodeId", entry.getNodeId()?string)}
-	
+
 		<a href="${subscribeURL?string}"><span class="glyphicon glyphicon-ok"> </span> Subscribe</a> to this wiki.
 	</#if>
 </#macro>
@@ -284,8 +355,14 @@
 	${tagRenderURL.setParameter("mvcRenderCommandName", "/wiki/view_tagged_pages")}
 	${tagRenderURL.setParameter("nodeId", entry.getNodeId()?string)}
 	${tagRenderURL.setParameter("tag", tagName)}
-	
+
 	<a href="${tagRenderURL}">${tagName}</a>
+</#macro>
+<#macro displayContributors
+	contributor
+>
+    <#assign author = contributor>
+    <li>${author}</li>
 </#macro>
 <#macro displayCategory
 	category
@@ -294,10 +371,10 @@
 	${categoryRenderURL.setParameter("mvcRenderCommandName", "/wiki/view_categorized_pages")}
 	${categoryRenderURL.setParameter("nodeId", entry.getNodeId()?string)}
 	${categoryRenderURL.setParameter("categoryId", category.getCategoryId()?string)}
-	
+
 	<a href="${categoryRenderURL}">${category.getName()}</a>
 </#macro>
 
 <#function getNormalizedWikiName string>
-	<#return string?replace("á", "a")?replace("é","e")?replace("í","i")?replace("[ú|ü|û]", "u", "r")?replace("[ó|ö|õ]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
+	<#return string?replace("ï¿½", "a")?replace("ï¿½","e")?replace("ï¿½","i")?replace("[ï¿½|ï¿½|ï¿½]", "u", "r")?replace("[ï¿½|ï¿½|ï¿½]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
 </#function>
