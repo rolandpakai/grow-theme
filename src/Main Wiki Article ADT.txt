@@ -3,6 +3,17 @@
 		$('[data-toggle="tooltip"]').tooltip()
 	});
 	$(document).ready(function () {
+		$(".sidenav-content .list-group").owlCarousel({
+			autoPlay: 4000,
+			items: 3,
+			itemsDesktop: [1199, 3],
+			itemsDesktopSmall: [979, 3],
+			itemsTablet: [768, 2],
+			itemsMobile: [479, 1],
+			pagination: false,
+			navigation: true,
+			navigationText: ["<i class='fa fa-angle-left'>", "<i class='fa fa-angle-right'>"]
+		});
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
 	});
@@ -21,10 +32,7 @@
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
-<script>
-console.log(${data});
-console.log(${childPages});
-</script>
+
 <#assign availableTasks = TaskHandler.getAvailableFlags(entry.getPageId())>
 
 <#assign wikiPageClassName = "com.liferay.wiki.model.WikiPage" >
