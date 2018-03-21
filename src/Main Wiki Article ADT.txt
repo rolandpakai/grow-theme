@@ -214,16 +214,16 @@
 <#macro displayUserURL
 	name
 >
-	<#assign wikiTitle = getNormalizedWikiName(name.userSreenName)>
-	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userSreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
+	<#assign wikiTitle = getNormalizedWikiName(name.userScreenName)>
+	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
 </#macro>
 <#macro displayContributorURL
     name
 >
 <#assign date = name.date>
 
-	<#assign wikiTitle = getNormalizedWikiName(name.userSreenName)>
-	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userSreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${date}</a>
+	<#assign wikiTitle = getNormalizedWikiName(name.userScreenName)>
+	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${date}</a>
 </#macro>
 <#macro displayPageDetails>
 	<#assign viewPageDetailsURL = renderResponse.createRenderURL() />
