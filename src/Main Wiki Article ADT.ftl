@@ -3,17 +3,6 @@
 		$('[data-toggle="tooltip"]').tooltip()
 	});
 	$(document).ready(function () {
-		$(".sidenav-content .list-group").owlCarousel({
-			autoPlay: 4000,
-			items: 3,
-			itemsDesktop: [1199, 3],
-			itemsDesktopSmall: [979, 3],
-			itemsTablet: [768, 2],
-			itemsMobile: [479, 1],
-			pagination: false,
-			navigation: true,
-			navigationText: ["<i class='fa fa-angle-left'>", "<i class='fa fa-angle-right'>"]
-		});
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
 	});
@@ -30,6 +19,8 @@
 <#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
+
+<#assign linkedPages = WikiHelperService.getLinkedPages(entry.getNodeId(), entry.getTitle())>
 
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
 
@@ -88,89 +79,83 @@
 				</#if>
 				${entry.getTitle()}
 			</h1>
-			<ul class="list-inline post-detail">
-				<li><span class="glyphicon glyphicon-user"></span> updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${entry.getStatusByUserName()}</a></li>
-				<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>
-				<#if categories?has_content>
-					<li><span class="glyphicon glyphicon-tag"> </span>
-						 <#list categories as category>
-							<@displayCategory
-								 category=category
-							 />
-						</#list>
-					</li>
-				</#if>
-				<#if tags?has_content>
-					<li><span class="glyphicon glyphicon-tags"> </span>
-						<#list tags as tag>
-							<@displayTag
-					    		tag=tag
-							/>
-						</#list>
-					</li>
-				</#if>
-				<li><span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}</li>
-			</ul>
 			${formattedContent}
 		</div>
 		<div class="col-md-4 asideInfo">
-		    <h4 class="sidebar-title">Information</h4>
-		    <ul class="list-unstyled categories">
-		        <li>
-		            <#if parentPage.title?has_content>
-    		            <li>ParentPage:</li>
-    		            <ul class="list-unstyled">
-    		                <li><@displayURL name=parentPage.title /></li>
-    		            </ul>
-		            </#if>
-		        </li>
-		        <li>
-		            <#if childPagesList?size != 0>
-        	            <li>ChildPages(${childPages.childPagesCount}):</li>
-        	            <ul class="list-unstyled">
-        	                <#list childPagesList as childPage>
-        	                    <li><@displayURL name=childPage.title /></li>
-        	                </#list>
-        	            </ul>
-		            </#if>
-		        </li>
-		        <li>
-		            <li>Author:</li>
-		            <ul class="list-unstyled">
-    		            <li><@displayUserURL name=data.author /></li>
-		            </ul>
-		        </li>
-		        <li>
-		            <#if contributors?size != 0>
-        	            <li>Contributors:</li>
-        	            <ul class="list-unstyled">
-        	                <#list contributors as contributor>
-        	                    <li><@displayContributorURL name=contributor /></li>
-        	                </#list>
-        	            </ul>
-		            </#if>
-		        </li>
-		        <li>
-		        <#if tags?has_content>
-    		        <li><span class="glyphicon glyphicon-tags"> </span></li>
-		            <ul class="list-unstyled">
-                        <li>
-                            <#list tags as tag>
-        						<@displayTag
-        					    	tag=tag
-        						/>
-        					</#list>
-    					</li>
-    				</ul>
-    			</#if>
-		        </li>
-		        <li>
-		            <li><span class="glyphicon glyphicon-eye-open"></span></li>
-		            <ul class="list-unstyled">
-                        <li>${assetEntry.getViewCount()}</li>
-                    </ul>
-		        </li>
-		    </ul>
+			<div class="sidebar-box">
+				<div class="mb40">
+					<ul class="list-inline">
+						<li><span class="glyphicon glyphicon-user"></span> updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a></li>
+						<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>
+						<li><span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}</li>
+					</ul>
+					<ul class="list-inline">
+						<li><span class="glyphicon glyphicon-user"></span> author: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a></li>		
+					</ul>				
+				</div>
+
+				<#if contributors?size != 0>
+				<div class="mb40">
+					<h4 class="sidebar-title">Contributors</h4>
+					<ul class="list-unstyled">
+						<#list contributors as contributor>
+							<li><ul class="list-inline"><@displayContributorURL name=contributor /></ul></li>
+						</#list>
+					</ul>
+				</div>	
+				</#if>
+				
+				<div class="mb40">	
+					<#if parentPage.title?has_content>				
+						<ul class="list-unstyled">
+							<li><h4 class="sidebar-title">ParentPage </h4><@displayURL name=parentPage.title /></li>
+						</ul>
+					</#if>
+					
+					<#if childPagesList?size != 0>
+						<h4 class="sidebar-title">ChildPages (${childPages.childPagesCount})</h4>
+						<ul class="list-unstyled">
+							<#list childPagesList as childPage>
+								<li><@displayURL name=childPage.title /></li>
+							</#list>
+						</ul>
+					</#if>
+				</div>
+
+				<#if linkedPages?size != 0>
+					<div class="mb40">	
+						<h4 class="sidebar-title">LinkedPages</h4>
+						<ul class="list-unstyled">
+							<#list linkedPages?keys as prop>
+								<li>$<@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+							</#list>
+						</ul>
+					</div>
+				</#if>
+					
+				<div class="mb40">					
+					<ul class="list-inline">
+						<#if categories?has_content>
+							<li><span class="glyphicon glyphicon-tag"></span>
+								<#list categories as category>
+									<@displayCategory
+										category=category
+									/>
+								</#list>
+							</li>
+						</#if>
+						<#if tags?has_content>
+							<li><span class="glyphicon glyphicon-tags"></span>
+								<#list tags as tag>
+									<@displayTag
+										tag=tag
+									/>
+								</#list>
+							</li>
+						</#if>
+					</ul>	
+				</div>
+			</div>
 		</div>
 	</div>
 <#if entry.getAttachmentsFileEntriesCount() gt 0>
@@ -215,15 +200,16 @@
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name.userScreenName)>
-	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
+	<a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
 </#macro>
 <#macro displayContributorURL
     name
 >
-<#assign date = name.date>
+	<#assign date = name.date>
+	
+	<li><span class="glyphicon glyphicon-user"></span> <a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${name.userScreenName}"> ${name.userFullName} </a></li>
+	<li><span class="glyphicon glyphicon-calendar"> </span> ${date}</li>
 
-	<#assign wikiTitle = getNormalizedWikiName(name.userScreenName)>
-	<a class="" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${date}</a>
 </#macro>
 <#macro displayPageDetails>
 	<#assign viewPageDetailsURL = renderResponse.createRenderURL() />
@@ -382,7 +368,11 @@
 
 	<a href="${categoryRenderURL}">${category.getName()}</a>
 </#macro>
-
+<#macro displayLinkedPages
+	title link
+>
+	<a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${link}">${title} <span class="glyphicon glyphicon-link"> </span></a>
+</#macro>
 <#function getNormalizedWikiName string>
 	<#return string?replace("�", "a")?replace("�","e")?replace("�","i")?replace("[�|�|�]", "u", "r")?replace("[�|�|�]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
 </#function>
