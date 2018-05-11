@@ -26,3 +26,13 @@ strong, b {
 		padding-right: 15px;
 	}
 }
+
+// GROW-166 Grow menu header hides the title navigated through the table of contents or a permalink within a page
+
+*[id]:before { 
+  display: block; 
+  content: " "; 
+  margin-top: -41.67px; // Navbar height
+  height: 41.67px; 
+  visibility: hidden; 
+}
