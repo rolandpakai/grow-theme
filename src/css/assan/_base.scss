@@ -64,12 +64,12 @@ hr {
     padding: 3px 6px;
 }
 a {
-    color: #333;
+    color: $skincolor;
     @include transition (all 200ms ease-in);
 }
 a:hover,
 a:focus {
-    color: $skincolor;
+    color: $graycolor;
     text-decoration: none;
 }
 .colored-text{
