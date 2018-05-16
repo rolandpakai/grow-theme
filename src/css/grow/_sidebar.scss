@@ -28,13 +28,12 @@
 	}	  
 	  
 	.a-container label {
-		/*display: block;*/
 		width: 100%;
 		position: relative;
 		cursor: pointer;
 		font-size: 1.3em;
 		font-weight: 700;
-		padding: 10px 30px;
+		padding: 10px 22px;
 		color: #aaa;
 		background-color: #eee;
 		border-bottom: 1px solid #ddd;
@@ -46,22 +45,18 @@
 		transition: all .2s ease;
 	}
 	
-	.a-container label:after {
-		content: "";
-		width: 0;
-		height: 0;
-		border-top: 8px solid #aaa;
-		border-right: 6px solid transparent;
-		border-bottom: 8px solid transparent;
-		border-left: 6px solid transparent;
-		position: absolute;
-		left: 10px;
-		top: 18px;
+	.a-container label:before {
+		content: "\e114";
+		right: 6px;
+		top: 4px;
+		position: relative;
+		display: inline-block;
+		font-family: 'Glyphicons Halflings';
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		-webkit-font-smoothing: antialiased;
 	}
-
-	.a-container label:hover:after {
-		border-top: 8px solid #222;
-	 }
 	
 	.a-container input:checked + label,
 	.a-container label:hover {
@@ -69,12 +64,9 @@
 		color: #222;
 	}
 	
-	.a-container .activate:checked + label:after {
-		border-top: 8px solid transparent;
-		border-right: 6px solid transparent;
-		border-bottom: 8px solid #222;
-		border-left: 6px solid transparent;
-		top: 8px;
+	.a-container .activate:checked + label:before {
+		content: "\e113";
+		top: 2px;
 	}
 	
 	.a-content {
