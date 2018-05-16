@@ -51,7 +51,7 @@
 	<#assign parentTitle = entry.getParentPage().getTitle()>
 </#if>
 	<div class="row wiki-body">
-		<div class="col-md-8 wiki-content">
+		<div class="col-md-9 wiki-content">
 			<div class="wiki-actions">
 				<ul class="list-unstyled">
 					<li><@displayEditLink/></li>
@@ -81,79 +81,73 @@
 			</h1>
 			${formattedContent}
 		</div>
-		<div class="col-md-4 asideInfo">
+		<div class="col-md-3 asideInfo">
 			<div class="sidebar-box">
-				<div class="mb40">
-					<ul class="list-inline">
-						<li><span class="glyphicon glyphicon-user"></span> updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a></li>
-						<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>
-						<li><span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}</li>
-					</ul>
-					<ul class="list-inline">
-						<li><span class="glyphicon glyphicon-user"></span> author: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a></li>		
-					</ul>				
-				</div>
-
-				<#if contributors?size != 0>
-				<div class="mb40">
-					<h4 class="sidebar-title">Contributors</h4>
+				<div class="sbox">
 					<ul class="list-unstyled">
-						<#list contributors as contributor>
-							<li><ul class="list-inline"><@displayContributorURL name=contributor /></ul></li>
-						</#list>
-					</ul>
-				</div>	
-				</#if>
-				
-				<div class="mb40">	
-					<#if parentPage.title?has_content>				
-						<ul class="list-unstyled">
-							<li><h4 class="sidebar-title">ParentPage </h4><@displayURL name=parentPage.title /></li>
-						</ul>
-					</#if>
-					
-					<#if childPagesList?size != 0>
-						<h4 class="sidebar-title">ChildPages (${childPages.childPagesCount})</h4>
-						<ul class="list-unstyled">
-							<#list childPagesList as childPage>
-								<li><@displayURL name=childPage.title /></li>
-							</#list>
-						</ul>
-					</#if>
-				</div>
-
-				<#if linkedPages?size != 0>
-					<div class="mb40">	
-						<h4 class="sidebar-title">LinkedPages</h4>
-						<ul class="list-unstyled">
-							<#list linkedPages?keys as prop>
-								<li>$<@displayLinkedPages title=prop link=linkedPages[prop] /></li>
-							</#list>
-						</ul>
-					</div>
-				</#if>
-					
-				<div class="mb40">					
-					<ul class="list-inline">
+						<li>
+							<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
+						</li>
 						<#if categories?has_content>
 							<li><span class="glyphicon glyphicon-tag"></span>
 								<#list categories as category>
-									<@displayCategory
-										category=category
-									/>
+									<@displayCategory category=category/>
 								</#list>
 							</li>
 						</#if>
 						<#if tags?has_content>
 							<li><span class="glyphicon glyphicon-tags"></span>
 								<#list tags as tag>
-									<@displayTag
-										tag=tag
-									/>
+									<@displayTag tag=tag/>
 								</#list>
 							</li>
 						</#if>
-					</ul>	
+					</ul>
+				</div>
+				<div class="sbox">
+					<h4 class="sidebar-title">Contributors</h4> <@displayPageActivities/>
+					<ul class="list-unstyled">
+						<li>
+							<ul class="list-inline">
+								<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
+								<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
+							</ul>	
+						</li>
+						<li>
+							<ul class="list-inline">
+								<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
+								<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
+							</ul>	
+						</li>	
+						<#if contributors?size != 0>
+							<#list contributors as contributor>
+								<li><@displayContributorURL name=contributor /></li>
+							</#list>
+						</#if>
+					</ul>			
+				</div>
+				
+				<div class="sbox">	
+					<h4 class="sidebar-title">Pages</h4>
+						<ul class="list-unstyled">
+							<#if parentPage.title?has_content>				
+								<li><@displayParentPageURL name=parentPage.title /></li>
+							</#if>
+							<#if childPagesList?size != 0>
+								<#list childPagesList as childPage>
+									<li><@displayChildPageURL name=childPage.title /></li>
+								</#list>
+							</#if>
+
+							<li class="loadmore">...load more</li>
+
+
+							<#list linkedPages?keys as prop>
+								<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+							</#list>
+
+							<li class="loadmore">...load more</li>
+						</ul>
 				</div>
 			</div>
 		</div>
@@ -194,7 +188,19 @@
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
-	<a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name} <span class="glyphicon glyphicon-link"> </span></a>
+	<span class="glyphicon glyphicon-link"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
+</#macro>
+<#macro displayParentPageURL
+	name
+>
+	<#assign wikiTitle = getNormalizedWikiName(name)>
+	<span class="glyphicon glyphicon-triangle-top"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
+</#macro>
+<#macro displayChildPageURL
+	name
+>
+	<#assign wikiTitle = getNormalizedWikiName(name)>
+	<span class="glyphicon glyphicon-triangle-bottom"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
 </#macro>
 <#macro displayUserURL
 	name
@@ -207,9 +213,7 @@
 >
 	<#assign date = name.date>
 	
-	<li><span class="glyphicon glyphicon-user"></span> <a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${name.userScreenName}"> ${name.userFullName} </a></li>
-	<li><span class="glyphicon glyphicon-calendar"> </span> ${date}</li>
-
+	<span class="glyphicon glyphicon-user"></span> <a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${name.userScreenName}"> ${name.userFullName} </a> (?)
 </#macro>
 <#macro displayPageDetails>
 	<#assign viewPageDetailsURL = renderResponse.createRenderURL() />
@@ -218,6 +222,14 @@
 	${viewPageDetailsURL.setParameter("redirect", currentURL)}
 
 	<a class="btn btn-default btn-block" href="${viewPageDetailsURL?string?trim}"><span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Details" data-animation="true"> </span></a>
+</#macro>
+<#macro displayPageActivities>
+	<#assign viewPageActivitiesURL = renderResponse.createRenderURL() />
+	${viewPageActivitiesURL.setParameter("mvcRenderCommandName", "/wiki/view_page_activities")}
+	${viewPageActivitiesURL.setParameter("title", entry.getTitle()?trim)}
+	${viewPageActivitiesURL.setParameter("redirect", currentURL)}
+
+	<span class="pl10"><a class="" href="${viewPageActivitiesURL?string?trim}">(View history)</a></span>
 </#macro>
 <#macro displayAddChildLink>
 	<#assign addPageURL = renderResponse.createRenderURL() />
@@ -371,7 +383,7 @@
 <#macro displayLinkedPages
 	title link
 >
-	<a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${link}">${title} <span class="glyphicon glyphicon-link"> </span></a>
+	<span class="glyphicon glyphicon-link"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${link}">${title}</a>
 </#macro>
 <#function getNormalizedWikiName string>
 	<#return string?replace("�", "a")?replace("�","e")?replace("�","i")?replace("[�|�|�]", "u", "r")?replace("[�|�|�]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
