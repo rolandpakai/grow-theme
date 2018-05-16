@@ -83,72 +83,87 @@
 		</div>
 		<div class="col-md-3 asideInfo">
 			<div class="sidebar-box">
-				<div class="sbox">
-					<ul class="list-unstyled">
-						<li>
-							<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
-						</li>
-						<#if categories?has_content>
-							<li><span class="glyphicon glyphicon-tag"></span>
-								<#list categories as category>
-									<@displayCategory category=category/>
-								</#list>
-							</li>
-						</#if>
-						<#if tags?has_content>
-							<li><span class="glyphicon glyphicon-tags"></span>
-								<#list tags as tag>
-									<@displayTag tag=tag/>
-								</#list>
-							</li>
-						</#if>
-					</ul>
-				</div>
-				<div class="sbox">
-					<h4 class="sidebar-title">Contributors</h4> <@displayPageActivities/>
-					<ul class="list-unstyled">
-						<li>
-							<ul class="list-inline">
-								<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
-								<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
-							</ul>	
-						</li>
-						<li>
-							<ul class="list-inline">
-								<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
-								<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
-							</ul>	
-						</li>	
-						<#if contributors?size != 0>
-							<#list contributors as contributor>
-								<li><@displayContributorURL name=contributor /></li>
-							</#list>
-						</#if>
-					</ul>			
-				</div>
-				
-				<div class="sbox">	
-					<h4 class="sidebar-title">Pages</h4>
-						<ul class="list-unstyled">
-							<#if parentPage.title?has_content>				
-								<li><@displayParentPageURL name=parentPage.title /></li>
-							</#if>
-							<#if childPagesList?size != 0>
-								<#list childPagesList as childPage>
-									<li><@displayChildPageURL name=childPage.title /></li>
-								</#list>
-							</#if>
+				<nav class="a-container">
 
-							<li class="loadmore">...load more</li>
+					<nav class="a-items">
+						<div class="sbox a-content">
+							<ul class="list-unstyled">
+								<li>
+									<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
+								</li>
+								<#if categories?has_content>
+									<li><span class="glyphicon glyphicon-tag"></span>
+										<#list categories as category>
+											<@displayCategory category=category/>
+										</#list>
+									</li>
+								</#if>
+								<#if tags?has_content>
+									<li><span class="glyphicon glyphicon-tags"></span>
+										<#list tags as tag>
+											<@displayTag tag=tag/>
+										</#list>
+									</li>
+								</#if>
+							</ul>
+						</div>
+					</nav>
+					
+					<nav class="a-items">
+						<input type="checkbox" name="contributors" id="contributors" class="activate hidden"/>
+						<label for="contributors">Contributors</label>
+						<div class="sbox a-content">
+							<ul class="list-unstyled">
+								<li>
+									<ul class="list-inline">
+										<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
+										<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
+									</ul>	
+								</li>
+								<li>
+									<ul class="list-inline">
+										<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
+										<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
+									</ul>	
+								</li>	
+								<#if contributors?size != 0>
+									<#list contributors as contributor>
+										<li><@displayContributorURL name=contributor /></li>
+									</#list>
+								</#if>
+								<li><@displayPageActivities/></li>
+							</ul>			
+						</div>
+					</nav>
+
+					<nav class="a-items">
+						<input type="checkbox" name="pages" id="pages" class="activate hidden"/>
+						<label for="pages">Pages</label>
+						<div class="sbox a-content">	
+								<ul class="list-unstyled">
+									<#if parentPage.title?has_content>				
+										<li><@displayParentPageURL name=parentPage.title /></li>
+									</#if>
+									<#if childPagesList?size != 0>
+										<#list childPagesList as childPage>
+											<li><@displayChildPageURL name=childPage.title /></li>
+										</#list>
+									</#if>
+
+									<li class="loadmore">...load more</li>
 
 
-							<#list linkedPages?keys as prop>
-								<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
-							</#list>
+									<#list linkedPages?keys as prop>
+										<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+									</#list>
 
-							<li class="loadmore">...load more</li>
-						</ul>
-				</div>
+									<li class="loadmore">...load more</li>
+								</ul>
+						</div>
+					</nav>
+
+				</nav>
+
 			</div>
 		</div>
 	</div>
@@ -229,7 +244,7 @@
 	${viewPageActivitiesURL.setParameter("title", entry.getTitle()?trim)}
 	${viewPageActivitiesURL.setParameter("redirect", currentURL)}
 
-	<span class="pl10"><a class="" href="${viewPageActivitiesURL?string?trim}">(View history)</a></span>
+	<span class="glyphicon glyphicon-list"></span> <a class="" href="${viewPageActivitiesURL?string?trim}">View history</a>
 </#macro>
 <#macro displayAddChildLink>
 	<#assign addPageURL = renderResponse.createRenderURL() />
