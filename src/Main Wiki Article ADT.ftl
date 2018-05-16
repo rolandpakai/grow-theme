@@ -140,27 +140,39 @@
 						<input type="checkbox" name="pages" id="pages" class="activate hidden"/>
 						<label for="pages">Pages</label>
 						<div class="sbox a-content">	
-								<ul class="list-unstyled">
-									<#if parentPage.title?has_content>				
-										<li><@displayParentPageURL name=parentPage.title /></li>
-									</#if>
-									<#if childPagesList?size != 0>
-										<#list childPagesList as childPage>
-											<li><@displayChildPageURL name=childPage.title /></li>
-										</#list>
-									</#if>
-
-									<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
-
-
-									<#list linkedPages?keys as prop>
-										<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+							<ul class="list-unstyled">
+								<#if parentPage.title?has_content>				
+									<li><@displayParentPageURL name=parentPage.title /></li>
+								</#if>
+								<#if childPagesList?size != 0>
+									<#list childPagesList as childPage>
+										<li><@displayChildPageURL name=childPage.title /></li>
 									</#list>
+								</#if>
 
-									<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
-								</ul>
+								<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
+
+
+								<#list linkedPages?keys as prop>
+									<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+								</#list>
+
+								<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
+							</ul>
 						</div>
 					</nav>
+					
+					<#if entry.getAttachmentsFileEntriesCount() gt 0>
+					<nav class="a-items">
+						<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
+						<label for="attachments">Attachments</label>
+						<div class="sbox a-content">
+							<ul class="list-unstyled">
+								<@displayAttachmentAccordion />
+							</ul>
+						</div>
+					</nav>
+					</#if>
 
 				</nav>
 
@@ -277,6 +289,42 @@
 
 		<a class="btn btn-default btn-block" href="${subscribeURL?string}"><span class="glyphicon glyphicon-ok" data-toggle="tooltip" data-placement="right" title="Subscribe" data-animation="true"> </span></a>
 	</#if>
+</#macro>
+<#macro displayAttachmentAccordion>
+	<#assign attachments = entry.getAttachmentsFileEntries()>
+	<#list attachments as file>
+		<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName() + "/" + file.getUuid() + "?status=0&download=true">
+		<#assign tooltip = "false">
+		<#assign title = file.getTitle()>
+		<#assign tooltipMsg = title>
+			<#if title?length gt 30>
+				<#assign title = title[0..25] + "(...)." + file.getExtension()>
+				<#assign tooltip = "true">
+			</#if>
+
+			<li>
+				<span class="glyphicon glyphicon-paperclip"></span>
+
+				<#if tooltip == "true">
+					<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+				<#else>
+					<a href="${downloadURL}">${title}</a>
+				</#if>
+				
+				<#assign size = file.getSize()>
+				<#assign unit = "B">
+				<#if size gt 1000>
+					<#assign size = size / 1024>
+					<#assign unit = "Kb">
+				</#if>
+				<#if size gt 1000>
+					<#assign size = size / 1024>
+					<#assign unit = "Mb">
+				</#if>
+
+				<span> (${size?string["0.##"]} ${unit})</span>
+			</li>
+	</#list>
 </#macro>
 <#macro displayAttachmentSection>
 	<#assign message = "attachments">
