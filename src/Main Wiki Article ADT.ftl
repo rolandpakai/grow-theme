@@ -154,7 +154,7 @@
 
 
 								<#list linkedPages?keys as prop>
-									<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
+									<li><@displayLinkedPagesUrl name=prop link=linkedPages[prop] /></li>
 								</#list>
 
 								<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
@@ -221,13 +221,60 @@
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
-	<span class="glyphicon glyphicon-triangle-top"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
+	<#assign tooltip = "false">
+	<#assign title = name>
+	<#assign tooltipMsg = name>
+	<#if title?length gt 37>
+		<#assign title = title[0..32] + "...">
+		<#assign tooltip = "true">
+	</#if>
+
+	<span class="glyphicon glyphicon-triangle-top"> </span> 
+	
+	<#if tooltip == "true">
+		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+	<#else>
+		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${title}</a>
+	</#if>
 </#macro>
 <#macro displayChildPageURL
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
-	<span class="glyphicon glyphicon-triangle-bottom"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
+	<#assign tooltip = "false">
+	<#assign title = name>
+	<#assign tooltipMsg = name>
+	<#if title?length gt 37>
+		<#assign title = title[0..32] + "...">
+		<#assign tooltip = "true">
+	</#if>
+
+	<span class="glyphicon glyphicon-triangle-bottom"> </span> 
+	
+	<#if tooltip == "true">
+		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+	<#else>
+		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${title}</a>
+	</#if>
+</#macro>
+<#macro displayLinkedPagesUrl
+	name link
+>
+	<#assign tooltip = "false">
+	<#assign title = name>
+	<#assign tooltipMsg = name>
+	<#if title?length gt 37>
+		<#assign title = title[0..32] + "...">
+		<#assign tooltip = "true">
+	</#if>
+
+	<span class="glyphicon glyphicon-link"> </span>
+
+	<#if tooltip == "true">
+		<a href="${link}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+	<#else>
+		<a href="${link}">${title}</a>
+	</#if>
 </#macro>
 <#macro displayUserURL
 	name
@@ -297,33 +344,33 @@
 		<#assign tooltip = "false">
 		<#assign title = file.getTitle()>
 		<#assign tooltipMsg = title>
-			<#if title?length gt 30>
-				<#assign title = title[0..25] + "(...)." + file.getExtension()>
-				<#assign tooltip = "true">
+		<#if title?length gt 28>
+			<#assign title = title[0..23] + "(...)." + file.getExtension()>
+			<#assign tooltip = "true">
+		</#if>
+
+		<li>
+			<span class="glyphicon glyphicon-paperclip"></span>
+
+			<#if tooltip == "true">
+				<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+			<#else>
+				<a href="${downloadURL}">${title}</a>
+			</#if>
+			
+			<#assign size = file.getSize()>
+			<#assign unit = "B">
+			<#if size gt 1000>
+				<#assign size = size / 1024>
+				<#assign unit = "Kb">
+			</#if>
+			<#if size gt 1000>
+				<#assign size = size / 1024>
+				<#assign unit = "Mb">
 			</#if>
 
-			<li>
-				<span class="glyphicon glyphicon-paperclip"></span>
-
-				<#if tooltip == "true">
-					<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
-				<#else>
-					<a href="${downloadURL}">${title}</a>
-				</#if>
-				
-				<#assign size = file.getSize()>
-				<#assign unit = "B">
-				<#if size gt 1000>
-					<#assign size = size / 1024>
-					<#assign unit = "Kb">
-				</#if>
-				<#if size gt 1000>
-					<#assign size = size / 1024>
-					<#assign unit = "Mb">
-				</#if>
-
-				<span> (${size?string["0.##"]} ${unit})</span>
-			</li>
+			<span> (${size?string["0.##"]} ${unit})</span>
+		</li>
 	</#list>
 </#macro>
 <#macro displayAttachmentSection>
@@ -442,11 +489,6 @@
 	${categoryRenderURL.setParameter("categoryId", category.getCategoryId()?string)}
 
 	<a href="${categoryRenderURL}">${category.getName()}</a>
-</#macro>
-<#macro displayLinkedPages
-	title link
->
-	<span class="glyphicon glyphicon-link"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${link}">${title}</a>
 </#macro>
 <#function getNormalizedWikiName string>
 	<#return string?replace("�", "a")?replace("�","e")?replace("�","i")?replace("[�|�|�]", "u", "r")?replace("[�|�|�]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
