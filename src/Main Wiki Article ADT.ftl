@@ -150,14 +150,14 @@
 										</#list>
 									</#if>
 
-									<li class="loadmore">...load more</li>
+									<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
 
 
 									<#list linkedPages?keys as prop>
 										<li><@displayLinkedPages title=prop link=linkedPages[prop] /></li>
 									</#list>
 
-									<li class="loadmore">...load more</li>
+									<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
 								</ul>
 						</div>
 					</nav>
