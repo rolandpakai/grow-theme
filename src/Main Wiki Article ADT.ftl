@@ -21,33 +21,23 @@
 </script>
 <#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
 <#assign JSONFactoryUtil = serviceLocator.findService("com.liferay.portal.kernel.json.JSONFactoryUtil")>
-
-<#assign data = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
-
-<#assign contributors = JSONFactoryUtil.looseDeserialize(data.contributors)>
-
 <#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
-
-<#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
-
-<#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
-
-<#assign linkedPages = WikiHelperService.getLinkedPages(entry.getNodeId(), entry.getTitle())>
-
-<#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
-
-<#assign availableTasks = TaskHandler.getAvailableFlags(entry.getPageId())>
-
-<#assign wikiPageClassName = "com.liferay.wiki.model.WikiPage" >
-<#assign wikiNodeClassName = "com.liferay.wiki.model.WikiNode" >
-<#assign serviceContext = staticUtil["com.liferay.portal.kernel.service.ServiceContextThreadLocal"].getServiceContext()>
-<#assign httpServletRequest = serviceContext.getRequest()>
-<#assign pubFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.public.servlet.mapping")>
-<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")>
 <#assign UserLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.UserLocalService")>
 <#assign AssetTagLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetTagLocalService")>
 <#assign AssetCategoryLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetCategoryLocalService")>
 <#assign SubscriptionLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.SubscriptionLocalService")>
+
+<#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
+<#assign contributorsList = JSONFactoryUtil.looseDeserialize(contributors.contributors)>
+<#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
+<#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
+<#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
+<#assign linkedPages = WikiHelperService.getLinkedPages(entry.getNodeId(), entry.getTitle())>
+<#assign linkedPagesList = JSONFactoryUtil.looseDeserialize(linkedPages.linkedPages)>
+<#assign availableTasks = TaskHandler.getAvailableFlags(entry.getPageId())>
+
+<#assign wikiPageClassName = "com.liferay.wiki.model.WikiPage" >
+<#assign wikiNodeClassName = "com.liferay.wiki.model.WikiNode" >
 <#assign isSubscribedPage = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiPageClassName, entry.getResourcePrimKey())>
 <#assign isSubscribedWiki = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiNodeClassName, entry.getNodeId())>
 <#assign tags = AssetTagLocalService.getAssetEntryAssetTags(assetEntry.getEntryId())>
@@ -56,12 +46,18 @@
 <#assign modifierUser = UserLocalService.getUser(entry.getStatusByUserId())>
 <#assign renderURL = renderResponse.createRenderURL()>
 <#assign assetRenderer = assetEntry.getAssetRenderer() />
+
+<#assign serviceContext = staticUtil["com.liferay.portal.kernel.service.ServiceContextThreadLocal"].getServiceContext()>
+<#assign httpServletRequest = serviceContext.getRequest()>
 <#assign portalURL = portal.getPortalURL(httpServletRequest)>
 <#assign siteFriendlyURL = themeDisplay.getSiteGroup().getFriendlyURL()>
 <#assign pageFriendlyURL = themeDisplay.getLayout().getFriendlyURL()>
+<#assign pubFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.public.servlet.mapping")>
+<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")>
 <#if entry.getParentPage()?has_content>
 	<#assign parentTitle = entry.getParentPage().getTitle()>
 </#if>
+
 	<div class="row wiki-body">
 		<div class="col-md-9 wiki-content">
 			<div class="wiki-inner">
@@ -141,9 +137,9 @@
 									<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
 								</ul>	
 							</li>	
-							<#if contributors?size != 0>
-								<#list contributors as contributor>
-									<li><@displayContributorURL name=contributor /></li>
+							<#if contributorsList?size != 0>
+								<#list contributorsList as contributor>
+									<li><@displayContributorURL contributor /></li>
 								</#list>
 							</#if>
 							<li><@displayPageActivities/></li>
@@ -160,32 +156,22 @@
 							</#if>
 							<#if childPagesList?size != 0>
 								<#list childPagesList as childPage>
-									<li><@displayChildPageURL name=childPage.title /></li>
+									<li><@displayPageURL name=childPage.title glyphicon="triangle-bottom"/></li>
 								</#list>
 							</#if>
 
 							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
 
-
-							<#list linkedPages?keys as prop>
-								<li><@displayLinkedPagesUrl name=prop link=linkedPages[prop] /></li>
-							</#list>
+							<#if linkedPagesList?size != 0>
+								<#list linkedPagesList as linkedPage>
+									<li><@displayPageURL name=linkedPage.title glyphicon="link"/></li>
+								</#list>
+							</#if>
 
 							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
 						</ul>
 					</div>
 				</nav>					
-				<#if entry.getAttachmentsFileEntriesCount() gt 0>
-				<nav class="a-items">
-					<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
-					<label for="attachments" class="accordion-label">Attachments</label>
-					<div class="sbox a-content">
-						<ul class="list-unstyled">
-							<@displayAttachmentAccordion />
-						</ul>
-					</div>
-				</nav>
-				</#if>
 			</div>
 		</div>
 	</div>
@@ -196,10 +182,13 @@
 		<@displayAttachmentSection/>
 	</div>
 </#if>
+
 <div class="comments content">
 	<h4 class="text-default">Comments</h4>
 	<@displayComments/>
 </div>
+
+<#--   macros   -->
 
 <#macro displayTaskFlagging>
    <#if availableTasks?has_content>
@@ -216,18 +205,21 @@
 
 	<a class="btn btn-default btn-block" data-toggle="tooltip" data-placement="right" title="Edit" data-animation="true" href="${editPageURL?string?trim}"><span class="glyphicon glyphicon-edit"> </span></a>
 </#macro>
+
 <#macro displayFriendlyURL
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
 	<a class="btn btn-default btn-block" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-link"> </span></a>
 </#macro>
+
 <#macro displayURL
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
 	<span class="glyphicon glyphicon-link"> </span> <a class="" data-toggle="tooltip" data-placement="right" title="Permalink" data-animation="true" href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${name}</a>
 </#macro>
+
 <#macro displayParentPageURL
 	name
 >
@@ -248,8 +240,9 @@
 		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${title}</a>
 	</#if>
 </#macro>
-<#macro displayChildPageURL
-	name
+
+<#macro displayPageURL
+	name glyphicon
 >
 	<#assign wikiTitle = getNormalizedWikiName(name)>
 	<#assign tooltip = "false">
@@ -260,7 +253,7 @@
 		<#assign tooltip = "true">
 	</#if>
 
-	<span class="glyphicon glyphicon-triangle-bottom"> </span> 
+	<span class="glyphicon glyphicon-${glyphicon}"> </span> 
 	
 	<#if tooltip == "true">
 		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
@@ -268,38 +261,21 @@
 		<a href="${portalURL}${pageFriendlyURL}/${wikiTitle}">${title}</a>
 	</#if>
 </#macro>
-<#macro displayLinkedPagesUrl
-	name link
->
-	<#assign tooltip = "false">
-	<#assign title = name>
-	<#assign tooltipMsg = name>
-	<#if title?length gt 37>
-		<#assign title = title[0..32] + "...">
-		<#assign tooltip = "true">
-	</#if>
 
-	<span class="glyphicon glyphicon-link"> </span>
-
-	<#if tooltip == "true">
-		<a href="${link}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
-	<#else>
-		<a href="${link}">${title}</a>
-	</#if>
-</#macro>
 <#macro displayUserURL
 	name
 >
 	<#assign wikiTitle = getNormalizedWikiName(name.userScreenName)>
+
 	<a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${wikiTitle}"><span class="glyphicon glyphicon-user"> </span> ${name.userScreenName}  -  <span class="glyphicon glyphicon-calendar"> </span> ${name.date?date}</a>
 </#macro>
+
 <#macro displayContributorURL
-    name
+    contributor
 >
-	<#assign date = name.date>
-	
-	<span class="glyphicon glyphicon-user"></span> <a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${name.userScreenName}"> ${name.userFullName} </a> (?)
+	<span class="glyphicon glyphicon-user"></span> <a class="" data-animation="true" href="${portalURL}${pubFriendlyURL}/${contributor.userScreenName}"> ${contributor.userFullName} </a> (${contributor.count})
 </#macro>
+
 <#macro displayPageDetails>
 	<#assign viewPageDetailsURL = renderResponse.createRenderURL() />
 	${viewPageDetailsURL.setParameter("mvcRenderCommandName", "/wiki/view_page_details")}
@@ -308,6 +284,7 @@
 
 	<a class="btn btn-default btn-block" href="${viewPageDetailsURL?string?trim}"><span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Details" data-animation="true"> </span></a>
 </#macro>
+
 <#macro displayPageActivities>
 	<#assign viewPageActivitiesURL = renderResponse.createRenderURL() />
 	${viewPageActivitiesURL.setParameter("mvcRenderCommandName", "/wiki/view_page_activities")}
@@ -316,6 +293,7 @@
 
 	<span class="glyphicon glyphicon-list"></span> <a class="" href="${viewPageActivitiesURL?string?trim}">View history</a>
 </#macro>
+
 <#macro displayAddChildLink>
 	<#assign addPageURL = renderResponse.createRenderURL() />
 	${addPageURL.setParameter("mvcRenderCommandName", "/wiki/edit_page")}
@@ -327,6 +305,7 @@
 
 	<a class="btn btn-default btn-block" href="${addPageURL?string}"><span class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="right" title="Add Child page" data-animation="true"> </span></a>
 </#macro>
+
 <#macro displayPageSubscription>
 	<#if isSubscribedPage>
 		<#assign unsubscribeURL = renderResponse.createActionURL()>
@@ -348,42 +327,7 @@
 		<a class="btn btn-default btn-block" href="${subscribeURL?string}"><span class="glyphicon glyphicon-ok" data-toggle="tooltip" data-placement="right" title="Subscribe" data-animation="true"> </span></a>
 	</#if>
 </#macro>
-<#macro displayAttachmentAccordion>
-	<#assign attachments = entry.getAttachmentsFileEntries()>
-	<#list attachments as file>
-		<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName() + "/" + file.getUuid() + "?status=0&download=true">
-		<#assign tooltip = "false">
-		<#assign title = file.getTitle()>
-		<#assign tooltipMsg = title>
-		<#if title?length gt 28>
-			<#assign title = title[0..23] + "(...)." + file.getExtension()>
-			<#assign tooltip = "true">
-		</#if>
 
-		<li>
-			<span class="glyphicon glyphicon-paperclip"></span>
-
-			<#if tooltip == "true">
-				<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
-			<#else>
-				<a href="${downloadURL}">${title}</a>
-			</#if>
-			
-			<#assign size = file.getSize()>
-			<#assign unit = "B">
-			<#if size gt 1000>
-				<#assign size = size / 1024>
-				<#assign unit = "Kb">
-			</#if>
-			<#if size gt 1000>
-				<#assign size = size / 1024>
-				<#assign unit = "Mb">
-			</#if>
-
-			<span> (${size?string["0.##"]} ${unit})</span>
-		</li>
-	</#list>
-</#macro>
 <#macro displayAttachmentSection>
 	<#assign message = "attachments">
 	<#if entry.getAttachmentsFileEntriesCount() == 1>
@@ -443,6 +387,7 @@
 		classPK=entry.getResourcePrimKey()
 	/>
 </#macro>
+
 <#macro displayComments>
 	<@liferay_ui["discussion"]
 		className=wikiPageClassName
@@ -455,6 +400,7 @@
 		userId=assetRenderer.getUserId()
 	/>
 </#macro>
+
 <#macro displayWikiSubscription>
 	<#if isSubscribedWiki>
 		<#assign unsubscribeURL = renderResponse.createActionURL()>
@@ -474,6 +420,7 @@
 		<a href="${subscribeURL?string}"><span class="glyphicon glyphicon-ok"> </span> Subscribe</a> to this wiki.
 	</#if>
 </#macro>
+
 <#macro displayTag
 	tag
 >
@@ -485,12 +432,14 @@
 
 	<a href="${tagRenderURL}">${tagName}</a>
 </#macro>
+
 <#macro displayContributors
 	contributor
 >
     <#assign author = contributor>
     <li>${author}</li>
 </#macro>
+
 <#macro displayCategory
 	category
 >
@@ -501,6 +450,9 @@
 
 	<a href="${categoryRenderURL}">${category.getName()}</a>
 </#macro>
+
+<#--   functions   -->
+
 <#function getNormalizedWikiName string>
-	<#return string?replace("�", "a")?replace("�","e")?replace("�","i")?replace("[�|�|�]", "u", "r")?replace("[�|�|�]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
+	<#return string?replace("á", "a")?replace("é","e")?replace("í","i")?replace("[ú|ü|ű]", "u", "r")?replace("[ó|ö|ő]", "o", "r")?replace("&", "<AMPERSAND>")?replace("'", "<APOSTROPHE>")?replace("@", "<AT>")?replace("]", "<CLOSE_BRACKET>,")?replace(")", "<CLOSE_PARENTHESIS>")?replace(":", "<COLON>")?replace(",", "<COMMA>")?replace("$", "<DOLLAR>")?replace("=", "<EQUAL>")?replace("!", "<EXCLAMATION>")?replace("[", "<OPEN_BRACKET>")?replace("(", "<OPEN_PARENTHESIS>")?replace("#", "<POUND>")?replace("?", "<QUESTION>")?replace(";", "<SEMICOLON>")?replace("/", "<SLASH>")?replace("*", "<STAR>")?replace("+","<PLUS>")?replace(" ","+")>
 </#function>
