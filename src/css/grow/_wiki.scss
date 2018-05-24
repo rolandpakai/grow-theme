@@ -111,7 +111,7 @@
 
 		@include sm() {
 			margin-left: -60px;
-			margin-top: 25px;
+			margin-top: 5px;
 		}
 
 		width: 45px;
@@ -233,11 +233,6 @@
 		tr {
 			text-align: center;
 		}
-
-		.wiki-inner {
-			padding-right: 45px;
-		}
-
 	}
 
 	.wiki-body {
