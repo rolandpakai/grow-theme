@@ -2,19 +2,16 @@
 .sidebar-label { 
 	cursor: pointer; 
 	display: block; 
-	padding: 10px 22px;
+	padding: 5px 19px;
+	margin-right: 10px;
 	text-align: center; 
-	font-size: 1.3em;
-	font-weight: 700;
-	line-height: 40px; 
 	width: 40px;
 	color: #aaa;
 	background-color: #eee;
 	border: 1px solid #AAA;
-	top: 125px;
-	height: 100%;
-	position: absolute;
+	top: 185px;
 	right: 0px;
+	position: absolute;
 }
 
 .sidebar-label:before {
@@ -66,6 +63,9 @@
 
 		.pr10 {
 			padding-right: 10px !important;
+		}
+		.pb10 {
+			padding-bottom: 10px !important;
 		}
 	
 		.loadmore {
