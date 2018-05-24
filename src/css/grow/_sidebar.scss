@@ -71,6 +71,14 @@
 		.loadmore {
 			padding-bottom: 12px;
 		}  
+
+		.contributors-table, .contributors-table td{
+			border: none !important;
+		}
+
+		.last-td {
+			padding-left: 15px;
+		}
 	}
 
 	.accordion-label {
