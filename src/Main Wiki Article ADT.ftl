@@ -5,6 +5,18 @@
 	$(document).ready(function () {
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
+
+		$(".wiki-body .sidebar-acc").click(function(){ 
+
+			if($(".sidebar-acc").prop('checked')) {
+				$('.wiki-content').animate({width: "100%"}, {duration: 500});
+				$('.sidebar').animate({width: "toggle"}, {duration: 500});
+			} else {	
+				$('.wiki-content').animate({width: "75%"}, {duration: 500});
+				$('.sidebar').animate({width: "toggle"}, {duration: 500});
+			}
+
+		});
 	});
 </script>
 <#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
@@ -52,133 +64,132 @@
 </#if>
 	<div class="row wiki-body">
 		<div class="col-md-9 wiki-content">
-			<div class="wiki-actions">
-				<ul class="list-unstyled">
-					<li><@displayEditLink/></li>
-					<li><@displayFriendlyURL name=entry.getTitle() /></li>
-					<li><@displayAddChildLink/></li>
-					<li><@displayPageSubscription/></li>
-					<li><@displayPageDetails/></li>
-					<li><@displayTaskFlagging/></li>
-					<@getRatings/>
-				</ul>
-			</div>
-			<#if tags?has_content>
-				<#list tags as tag>
-			    	<#if tag.name?matches("official", "i")>
-			    		<#assign official="true">
-			    	</#if>
-				</#list>
-			</#if>
-			<h1 class="text-default">
-				<#if official?has_content>
-					<span class="">
-						<i class="icon-check"></i>
-						<span class="taglib-text hide-accessible"></span>
-					</span>
+			<div class="wiki-inner">
+				<div class="wiki-actions">
+					<ul class="list-unstyled">
+						<li><@displayEditLink/></li>
+						<li><@displayFriendlyURL name=entry.getTitle() /></li>
+						<li><@displayAddChildLink/></li>
+						<li><@displayPageSubscription/></li>
+						<li><@displayPageDetails/></li>
+						<li><@displayTaskFlagging/></li>
+						<@getRatings/>
+					</ul>
+				</div>
+				<#if tags?has_content>
+					<#list tags as tag>
+						<#if tag.name?matches("official", "i")>
+							<#assign official="true">
+						</#if>
+					</#list>
 				</#if>
-				${entry.getTitle()}
-			</h1>
-			${formattedContent}
-		</div>
-		<div class="col-md-3 asideInfo">
-			<div class="sidebar-box">
-				<nav class="a-container">
-
-					<nav class="a-items">
-						<div class="sbox a-content">
-							<ul class="list-unstyled">
-								<li>
-									<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
-								</li>
-								<#if categories?has_content>
-									<li><span class="glyphicon glyphicon-tag"></span>
-										<#list categories as category>
-											<@displayCategory category=category/>
-										</#list>
-									</li>
-								</#if>
-								<#if tags?has_content>
-									<li><span class="glyphicon glyphicon-tags"></span>
-										<#list tags as tag>
-											<@displayTag tag=tag/>
-										</#list>
-									</li>
-								</#if>
-							</ul>
-						</div>
-					</nav>
-					
-					<nav class="a-items">
-						<input type="checkbox" name="contributors" id="contributors" class="activate hidden"/>
-						<label for="contributors">Contributors</label>
-						<div class="sbox a-content">
-							<ul class="list-unstyled">
-								<li>
-									<ul class="list-inline">
-										<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
-										<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
-									</ul>	
-								</li>
-								<li>
-									<ul class="list-inline">
-										<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
-										<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
-									</ul>	
-								</li>	
-								<#if contributors?size != 0>
-									<#list contributors as contributor>
-										<li><@displayContributorURL name=contributor /></li>
-									</#list>
-								</#if>
-								<li><@displayPageActivities/></li>
-							</ul>			
-						</div>
-					</nav>
-
-					<nav class="a-items">
-						<input type="checkbox" name="pages" id="pages" class="activate hidden"/>
-						<label for="pages">Pages</label>
-						<div class="sbox a-content">	
-							<ul class="list-unstyled">
-								<#if parentPage.title?has_content>				
-									<li><@displayParentPageURL name=parentPage.title /></li>
-								</#if>
-								<#if childPagesList?size != 0>
-									<#list childPagesList as childPage>
-										<li><@displayChildPageURL name=childPage.title /></li>
-									</#list>
-								</#if>
-
-								<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
-
-
-								<#list linkedPages?keys as prop>
-									<li><@displayLinkedPagesUrl name=prop link=linkedPages[prop] /></li>
-								</#list>
-
-								<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
-							</ul>
-						</div>
-					</nav>
-					
-					<#if entry.getAttachmentsFileEntriesCount() gt 0>
-					<nav class="a-items">
-						<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
-						<label for="attachments">Attachments</label>
-						<div class="sbox a-content">
-							<ul class="list-unstyled">
-								<@displayAttachmentAccordion />
-							</ul>
-						</div>
-					</nav>
+				<h1 class="text-default">
+					<#if official?has_content>
+						<span class="">
+							<i class="icon-check"></i>
+							<span class="taglib-text hide-accessible"></span>
+						</span>
 					</#if>
+					${entry.getTitle()}
+				</h1>
+				${formattedContent}
 
+				<input type="checkbox" name="sidebar" id="sidebar" class="sidebar-acc hidden"/> 
+				<label class="sidebar-label" for="sidebar"></label>
+			</div>
+		</div>	
+
+		<div class="col-md-3 sidebar">
+			<div class="sidebar-box">
+				<nav class="a-items">
+					<div class="sbox a-content">
+						<ul class="list-unstyled">
+							<li>
+								<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
+							</li>
+							<#if categories?has_content>
+								<li><span class="glyphicon glyphicon-tag"></span>
+									<#list categories as category>
+										<@displayCategory category=category/>
+									</#list>
+								</li>
+							</#if>
+							<#if tags?has_content>
+								<li><span class="glyphicon glyphicon-tags"></span>
+									<#list tags as tag>
+										<@displayTag tag=tag/>
+									</#list>
+								</li>
+							</#if>
+						</ul>
+					</div>
+				</nav>					
+				<nav class="a-items">
+					<input type="checkbox" name="contributors" id="contributors" class="activate hidden"/>
+					<label for="contributors" class="accordion-label">Contributors</label>
+					<div class="sbox a-content">
+						<ul class="list-unstyled">
+							<li>
+								<ul class="list-inline">
+									<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
+									<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
+								</ul>	
+							</li>
+							<li>
+								<ul class="list-inline">
+									<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
+									<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
+								</ul>	
+							</li>	
+							<#if contributors?size != 0>
+								<#list contributors as contributor>
+									<li><@displayContributorURL name=contributor /></li>
+								</#list>
+							</#if>
+							<li><@displayPageActivities/></li>
+						</ul>			
+					</div>
 				</nav>
+				<nav class="a-items">
+					<input type="checkbox" name="pages" id="pages" class="activate hidden"/>
+					<label for="pages" class="accordion-label">Pages</label>
+					<div class="sbox a-content">	
+						<ul class="list-unstyled">
+							<#if parentPage.title?has_content>				
+								<li><@displayParentPageURL name=parentPage.title /></li>
+							</#if>
+							<#if childPagesList?size != 0>
+								<#list childPagesList as childPage>
+									<li><@displayChildPageURL name=childPage.title /></li>
+								</#list>
+							</#if>
 
+							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
+
+
+							<#list linkedPages?keys as prop>
+								<li><@displayLinkedPagesUrl name=prop link=linkedPages[prop] /></li>
+							</#list>
+
+							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
+						</ul>
+					</div>
+				</nav>					
+				<#if entry.getAttachmentsFileEntriesCount() gt 0>
+				<nav class="a-items">
+					<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
+					<label for="attachments" class="accordion-label">Attachments</label>
+					<div class="sbox a-content">
+						<ul class="list-unstyled">
+							<@displayAttachmentAccordion />
+						</ul>
+					</div>
+				</nav>
+				</#if>
 			</div>
 		</div>
 	</div>
+
 <#if entry.getAttachmentsFileEntriesCount() gt 0>
 	<div class="row attachments content">
 		<h4 class="text-default">Attachments</h4>
