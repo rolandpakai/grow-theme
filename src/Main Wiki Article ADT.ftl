@@ -161,16 +161,20 @@
 									<li><@displayPageURL name=childPage.title glyphicon="triangle-bottom"/></li>
 								</#list>
 							</#if>
-
-							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
-
+							
+							<li class="loadmore">
+								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
+							</li>
+							
 							<#if linkedPagesList?size != 0>
 								<#list linkedPagesList as linkedPage>
 									<li><@displayPageURL name=linkedPage.title glyphicon="link"/></li>
 								</#list>
 							</#if>
-
-							<li class="loadmore"><span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a></li>
+							
+							<li class="loadmore">
+								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
+							</li>						
 						</ul>
 					</div>
 				</nav>					
