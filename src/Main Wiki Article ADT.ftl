@@ -98,6 +98,8 @@
 		<div class="col-md-3 sidebar">
 			<div class="sidebar-box">
 				<nav class="a-items">
+					<input type="checkbox" name="tags" id="tags" class="activate hidden"/>
+					<label for="tags" class="accordion-label">Tags</label>
 					<div class="sbox a-content">
 						<ul class="list-unstyled">
 							<li>
