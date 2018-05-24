@@ -233,6 +233,11 @@
 		tr {
 			text-align: center;
 		}
+
+		.wiki-inner {
+			padding-right: 45px;
+		}
+
 	}
 
 	.wiki-body {
@@ -281,12 +286,16 @@
 		color: #444;
 	}
 
-	.asideInfo {
-  		margin-top: 120px !important; 
+	.sidebar {
+  		margin-top: 125px !important; 
 	}
 
 	.glyphicon {
 		padding-right: 5px;
+	}
+
+	.hidden {
+		display: none;
 	}
 }
 
