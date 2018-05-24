@@ -29,6 +29,7 @@
 
 <#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
 <#assign contributorsList = JSONFactoryUtil.looseDeserialize(contributors.contributors)>
+<#assign authorUser = JSONFactoryUtil.looseDeserialize(contributors.author)>
 <#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
@@ -42,9 +43,7 @@
 <#assign isSubscribedWiki = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiNodeClassName, entry.getNodeId())>
 <#assign tags = AssetTagLocalService.getAssetEntryAssetTags(assetEntry.getEntryId())>
 <#assign categories = AssetCategoryLocalService.getAssetEntryAssetCategories(assetEntry.getEntryId())>
-<#assign creatorUser = UserLocalService.getUser(assetEntry.getUserId())>
 <#assign modifierUser = UserLocalService.getUser(entry.getStatusByUserId())>
-<#assign renderURL = renderResponse.createRenderURL()>
 <#assign assetRenderer = assetEntry.getAssetRenderer() />
 
 <#assign serviceContext = staticUtil["com.liferay.portal.kernel.service.ServiceContextThreadLocal"].getServiceContext()>
@@ -90,11 +89,9 @@
 				</h1>
 				${formattedContent}
 
-				<input type="checkbox" name="sidebar" id="sidebar" class="sidebar-acc hidden"/> 
-				<label class="sidebar-label" for="sidebar"></label>
+
 			</div>
 		</div>	
-
 		<div class="col-md-3 sidebar">
 			<div class="sidebar-box">
 				<nav class="a-items">
@@ -135,8 +132,8 @@
 							</li>
 							<li>
 								<ul class="list-inline">
-									<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.getScreenName()}">${creatorUser.getFullName()}</a> </li>
-									<li><span class="glyphicon glyphicon-calendar"> </span> ?? ??, ?????</li>
+									<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + authorUser.userScreenName}">${authorUser.userFullName}</a> </li>
+									<li><span class="glyphicon glyphicon-calendar"> </span> ${authorUser.date}</li>
 								</ul>	
 							</li>	
 							<#if contributorsList?size != 0>
@@ -162,7 +159,7 @@
 								</#list>
 							</#if>
 							
-							<li class="loadmore">
+							<li class="pb10">
 								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
 							</li>
 							
@@ -172,27 +169,34 @@
 								</#list>
 							</#if>
 							
-							<li class="loadmore">
+							<li>
 								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
 							</li>						
 						</ul>
 					</div>
-				</nav>					
+				</nav>	
+				<#if entry.getAttachmentsFileEntriesCount() gt 0>
+				<nav class="a-items">
+					<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
+					<label for="attachments" class="accordion-label">Attachments</label>
+					<div class="sbox a-content">
+						<ul class="list-unstyled">
+							<@displayAttachmentAccordion />
+						</ul>
+					</div>
+				</nav>
+				</#if>
 			</div>
 		</div>
+		<div>
+			<input type="checkbox" name="sidebar" id="sidebar" class="sidebar-acc hidden"/> 
+			<label class="sidebar-label" for="sidebar"></label>
+		</div>
 	</div>
-
-<#if entry.getAttachmentsFileEntriesCount() gt 0>
-	<div class="row attachments content">
-		<h4 class="text-default">Attachments</h4>
-		<@displayAttachmentSection/>
+	<div class="comments content">
+		<h4 class="text-default">Comments</h4>
+		<@displayComments/>
 	</div>
-</#if>
-
-<div class="comments content">
-	<h4 class="text-default">Comments</h4>
-	<@displayComments/>
-</div>
 
 <#--   macros   -->
 
@@ -334,57 +338,41 @@
 	</#if>
 </#macro>
 
-<#macro displayAttachmentSection>
-	<#assign message = "attachments">
-	<#if entry.getAttachmentsFileEntriesCount() == 1>
-		<#assign message = "attachment">
-	</#if>
+<#macro displayAttachmentAccordion>
 	<#assign attachments = entry.getAttachmentsFileEntries()>
-	<a data-toggle="collapse" href="#attachmentsCollapse" aria-expanded="false" aria-controls="collapseExample">
-	<span class="glyphicon glyphicon-paperclip"> </span>
-	${entry.getAttachmentsFileEntriesCount()} ${message} <span class="caret"> </span></a><br>
-	<div class="collapse" id="attachmentsCollapse">
-		<div class="table-responsive">
-			<table class="table table-condensed table-hover table-striped table-responsive">
-			<tbody>
-				<tr>
-					<th>Filename</th>
-					<th>Size</th>
-				</tr>
-				<#list attachments as file>
-					<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName() + "/" + file.getUuid() + "?status=0&download=true">
-					<#assign tooltip = "false">
-					<#assign title = file.getTitle()>
-						<#if title?length gt 60>
-							<#assign tooltipMsg = title>
-							<#assign title = title[0..50] + "(...)." + file.getExtension()>
-							<#assign tooltip = "true">
-						</#if>
-					<tr>
-						<td>
-							<#if tooltip == "true">
-									<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
-							<#else>
-									<a href="${downloadURL}">${title}</a>
-							</#if>
-						</td>
-						<#assign size = file.getSize()>
-						<#assign unit = "B">
-						<#if size gt 1000>
-							<#assign size = size / 1024>
-							<#assign unit = "Kb">
-						</#if>
-						<#if size gt 1000>
-							<#assign size = size / 1024>
-							<#assign unit = "Mb">
-						</#if>
-						<td>${size?string["0.##"]} ${unit}</td>
-					</tr>
-				</#list>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	<#list attachments as file>
+		<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName() + "/" + file.getUuid() + "?status=0&download=true">
+		<#assign tooltip = "false">
+		<#assign title = file.getTitle()>
+		<#assign tooltipMsg = title>
+		<#if title?length gt 28>
+			<#assign title = title[0..23] + "(...)." + file.getExtension()>
+			<#assign tooltip = "true">
+		</#if>
+ 
+		<li>
+			<span class="glyphicon glyphicon-paperclip"></span>
+ 
+			<#if tooltip == "true">
+				<a href="${downloadURL}" data-toggle="tooltip" data-placement="top" title="${tooltipMsg}" data-animation="true">${title}</a>
+			<#else>
+				<a href="${downloadURL}">${title}</a>
+			</#if>
+ 			
+			<#assign size = file.getSize()>
+			<#assign unit = "B">
+			<#if size gt 1000>
+				<#assign size = size / 1024>
+				<#assign unit = "Kb">
+			</#if>
+			<#if size gt 1000>
+				<#assign size = size / 1024>
+				<#assign unit = "Mb">
+			</#if>
+ 
+			<span> (${size?string["0.##"]} ${unit})</span>
+		</li>
+	</#list>
 </#macro>
 
 <#macro getRatings>
