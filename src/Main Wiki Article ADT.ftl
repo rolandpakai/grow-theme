@@ -29,7 +29,7 @@
 
 <#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
 <#assign contributorsList = JSONFactoryUtil.looseDeserialize(contributors.contributors)>
-<#assign authorUser = JSONFactoryUtil.looseDeserialize(contributors.author)>
+<#assign authorUser = contributors.author>
 <#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
@@ -88,8 +88,6 @@
 					${entry.getTitle()}
 				</h1>
 				${formattedContent}
-
-
 			</div>
 		</div>	
 		<div class="col-md-3 sidebar">
@@ -125,16 +123,16 @@
 					<div class="sbox a-content">
 						<ul class="list-unstyled">
 							<li>
-								<ul class="list-inline">
-									<li><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </li>
-									<li><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
-								</ul>	
-							</li>
-							<li>
-								<ul class="list-inline">
-									<li><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + authorUser.userScreenName}">${authorUser.userFullName}</a> </li>
-									<li><span class="glyphicon glyphicon-calendar"> </span> ${authorUser.date}</li>
-								</ul>	
+								<table>
+									<tr>	
+										<td><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </td>
+										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
+									</tr>
+									<tr>
+										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + authorUser.userScreenName}">${authorUser.userFullName}</a> </td>
+										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${authorUser.date?date}</td>
+									</tr>
+								</table>	
 							</li>	
 							<#if contributorsList?size != 0>
 								<#list contributorsList as contributor>
