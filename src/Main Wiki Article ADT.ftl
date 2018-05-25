@@ -29,7 +29,7 @@
 
 <#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
 <#assign contributorsList = JSONFactoryUtil.looseDeserialize(contributors.contributors)>
-<#assign authorUser = contributors.author>
+<#assign creatorUser = contributors.creator>
 <#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
@@ -123,14 +123,14 @@
 					<div class="sbox a-content">
 						<ul class="list-unstyled">
 							<li>
-								<table>
+								<table class="contributors-table">
 									<tr>	
 										<td><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </td>
 										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
 									</tr>
 									<tr>
-										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + authorUser.userScreenName}">${authorUser.userFullName}</a> </td>
-										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${authorUser.date?date}</td>
+										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.userScreenName}">${creatorUser.userFullName}</a> </td>
+										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${creatorUser.date?date}</td>
 									</tr>
 								</table>	
 							</li>	
@@ -157,7 +157,7 @@
 								</#list>
 							</#if>
 							
-							<li class="pb10">
+							<li class="loadmore pb10">
 								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
 							</li>
 							
@@ -167,7 +167,7 @@
 								</#list>
 							</#if>
 							
-							<li>
+							<li class="loadmore">
 								<!--<span class="glyphicon glyphicon-option-horizontal pr10"></span><a href="#" onclick="alert('load more');">load more</a>-->
 							</li>						
 						</ul>
