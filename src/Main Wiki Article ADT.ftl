@@ -146,7 +146,7 @@
 								</li>
 							</#if>
 							<#if categories?has_content>
-								<li><span class="glyphicon glyphicon-tag"></span>
+								<li><span class="glyphicon glyphicon-tags"></span>
 									<#list categories as category>
 										<@displayCategory category=category/>
 									</#list>
