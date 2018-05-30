@@ -1,21 +1,22 @@
-
 .sidebar-label { 
 	cursor: pointer; 
 	display: block; 
-	padding: 5px 19px;
+	padding: 3px 18px;
 	margin-right: 10px;
 	text-align: center; 
 	width: 40px;
-	color: #aaa;
-	background-color: #eee;
-	border: 1px solid #AAA;
+	color:#01579b;
+	border: 1px solid #ccc;
+	background-color: #fff;
 	top: 185px;
 	right: 0px;
 	position: absolute;
+	border-radius: 2px;
+	text-transform: uppercase;
 }
 
 .sidebar-label:before {
-	content: "\e079";
+	content: "\e080";
 	right: 7px;
 	top: 4px;
 	position: relative;
@@ -27,14 +28,14 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.sidebar-acc:checked + .sidebar-label, 
 .sidebar-label:hover { 
-	background-color: #ddd;
-    color: #222;
+	background-color: #333;
+    border-color: #333;
+    color: #fff;
 }
 
 .sidebar-acc:checked + .sidebar-label:before {
-	content: "\e080";
+	content: "\e079";
 	right: 9px;
 }
 
@@ -88,9 +89,7 @@
 		font-size: 1.3em;
 		font-weight: 700;
 		padding: 10px 22px;
-		color: #aaa;
-		background-color: #eee;
-		border: 1px solid #AAA;
+		color: #333;
 		
 		-webkit-transition: all .2s ease;
 		-moz-transition: all .2s ease;
@@ -100,7 +99,7 @@
 	}
 	
 	.accordion-label:before {
-		content: "\e114";
+		content: "\e113";
 		right: 6px;
 		top: 4px;
 		position: relative;
@@ -112,14 +111,8 @@
 		-webkit-font-smoothing: antialiased;
 	}
 	
-	.activate:checked + .accordion-label,
-	.accordion-label:hover {
-		background-color: #ddd;
-		color: #222;
-	}
-	
 	.activate:checked + .accordion-label:before {
-		content: "\e113";
+		content: "\e114";
 		top: 2px;
 	}
 	
