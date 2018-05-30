@@ -57,6 +57,14 @@
 	<#assign parentTitle = entry.getParentPage().getTitle()>
 </#if>
 
+<#if tags?has_content>
+	<#list tags as tag>
+		<#if tag.name?matches("official", "i")>
+			<#assign official="true">
+		</#if>
+	</#list>
+</#if>
+
 	<div class="row wiki-body">
 		<div class="col-md-9 wiki-content">
 			<div class="wiki-inner">
@@ -71,13 +79,6 @@
 						<@getRatings/>
 					</ul>
 				</div>
-				<#if tags?has_content>
-					<#list tags as tag>
-						<#if tag.name?matches("official", "i")>
-							<#assign official="true">
-						</#if>
-					</#list>
-				</#if>
 				<h1 class="text-default">
 					<#if official?has_content>
 						<span class="">
@@ -92,36 +93,15 @@
 		</div>	
 		<div class="col-md-3 sidebar">
 			<div class="sidebar-box">
-				<nav class="a-items">
-					<input type="checkbox" name="tags" id="tags" class="activate hidden"/>
-					<label for="tags" class="accordion-label">Tags</label>
-					<div class="sbox a-content">
-						<ul class="list-unstyled">
-							<li>
-								<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
-							</li>
-							<#if categories?has_content>
-								<li><span class="glyphicon glyphicon-tag"></span>
-									<#list categories as category>
-										<@displayCategory category=category/>
-									</#list>
-								</li>
-							</#if>
-							<#if tags?has_content>
-								<li><span class="glyphicon glyphicon-tags"></span>
-									<#list tags as tag>
-										<@displayTag tag=tag/>
-									</#list>
-								</li>
-							</#if>
-						</ul>
-					</div>
-				</nav>					
+
 				<nav class="a-items">
 					<input type="checkbox" name="contributors" id="contributors" class="activate hidden"/>
 					<label for="contributors" class="accordion-label">Contributors</label>
 					<div class="sbox a-content">
 						<ul class="list-unstyled">
+							<li>
+								<span class="glyphicon glyphicon-eye-open"></span> ${assetEntry.getViewCount()}
+							</li>
 							<li>
 								<table class="contributors-table">
 									<tr>	
@@ -143,6 +123,39 @@
 						</ul>			
 					</div>
 				</nav>
+
+				<nav class="a-items">
+					<input type="checkbox" name="tags" id="tags" class="activate hidden"/>
+					<label for="tags" class="accordion-label">Tags</label>
+					<div class="sbox a-content">
+						<ul class="list-unstyled">
+							<#if tags?has_content>
+							    <#if official?has_content>
+								<li>
+									<span class="glyphicon glyphicon-check"></span> 
+									<@displayTag tagName="official"/>
+								</li>
+								</#if>
+								<li>
+									<span class="glyphicon glyphicon-tags"></span>
+									<#list tags as tag>
+										<#if !(tag.name?matches("official", "i"))>
+											<@displayTag tagName=tag.name/>
+										</#if>	
+									</#list>
+								</li>
+							</#if>
+							<#if categories?has_content>
+								<li><span class="glyphicon glyphicon-tag"></span>
+									<#list categories as category>
+										<@displayCategory category=category/>
+									</#list>
+								</li>
+							</#if>
+						</ul>
+					</div>
+				</nav>					
+
 				<nav class="a-items">
 					<input type="checkbox" name="pages" id="pages" class="activate hidden"/>
 					<label for="pages" class="accordion-label">Pages</label>
@@ -414,10 +427,9 @@
 </#macro>
 
 <#macro displayTag
-	tag
+	tagName
 >
 	<#assign tagRenderURL = renderResponse.createRenderURL()>
-	<#assign tagName = tag.getName()>
 	${tagRenderURL.setParameter("mvcRenderCommandName", "/wiki/view_tagged_pages")}
 	${tagRenderURL.setParameter("nodeId", entry.getNodeId()?string)}
 	${tagRenderURL.setParameter("tag", tagName)}
