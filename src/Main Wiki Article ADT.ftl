@@ -109,7 +109,7 @@
 										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
 									</tr>
 									<tr>
-										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.userScreenName}">${creatorUser.userFullName}</a> </td>
+										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.userScreenName}">${creatorUser.userFullName}</a> (${creatorUser.count})</td>
 										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${creatorUser.date?date}</td>
 									</tr>
 								</table>	
