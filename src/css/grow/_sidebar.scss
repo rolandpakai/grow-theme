@@ -12,47 +12,6 @@
 		color:$skincolor;
 	}
 
-	.sidebar-label { 
-		cursor: pointer; 
-		display: block; 
-		padding: 3px 18px;
-		margin-right: 10px;
-		text-align: center; 
-		width: 40px;
-		color:#01579b;
-		border: 1px solid #ccc;
-		background-color: #fff;
-		top: 185px;
-		right: 0px;
-		position: absolute;
-		border-radius: 2px;
-		text-transform: uppercase;
-	}
-
-	.sidebar-label:before {
-		content: "\e080";
-		right: 7px;
-		top: 4px;
-		position: relative;
-		display: inline-block;
-		font-family: 'Glyphicons Halflings';
-		font-style: normal;
-		font-weight: normal;
-		line-height: 1;
-		-webkit-font-smoothing: antialiased;
-	}
-
-	.sidebar-label:hover { 
-		background-color: #333;
-		border-color: #333;
-		color: #fff;
-	}
-
-	.sidebar-acc:checked + .sidebar-label:before {
-		content: "\e079";
-		right: 9px;
-	}
-	
 	.sidebar-box {
 
 		.sbox {
@@ -129,5 +88,47 @@
 			display: none;
 		}
 
+	}
+}
+
+.sidebar-button { 
+
+	.sidebar-label { 
+		cursor: pointer; 
+		display: block; 
+		padding: 3px 18px;
+		text-align: center; 
+		width: 40px;
+		color:#01579b;
+		border: 1px solid #ccc;
+		background-color: #fff;
+		top: 85px;
+		right: 0px;
+		position: absolute;
+		border-radius: 2px;
+		text-transform: uppercase;
+	}
+
+	.sidebar-label:before {
+		content: "\e080";
+		right: 7px;
+		top: 4px;
+		position: relative;
+		display: inline-block;
+		font-family: 'Glyphicons Halflings';
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.sidebar-label:hover { 
+		background-color: #333;
+		border-color: #333;
+		color: #fff;
+	}
+
+	#sidebar:checked + .sidebar-label:before {
+		content: "\e079";
 	}
 }
