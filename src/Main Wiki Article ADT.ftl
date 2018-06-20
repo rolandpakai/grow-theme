@@ -6,9 +6,9 @@
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
 		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
 
-		$(".wiki-body .sidebar-acc").click(function(){ 
+		$(".wiki-body #sidebar").click(function(){ 
 
-			if($(".sidebar-acc").prop('checked')) {
+			if($("#sidebar").prop('checked')) {
 				$('.wiki-content').animate({width: "100%"}, {duration: 500});
 				$('.sidebar').animate({width: "toggle"}, {duration: 500});
 			} else {	
@@ -24,7 +24,6 @@
 <#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
 <#assign UserLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.UserLocalService")>
 <#assign AssetTagLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetTagLocalService")>
-<#assign AssetCategoryLocalService = serviceLocator.findService("com.liferay.asset.kernel.service.AssetCategoryLocalService")>
 <#assign SubscriptionLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.SubscriptionLocalService")>
 
 <#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
@@ -42,7 +41,6 @@
 <#assign isSubscribedPage = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiPageClassName, entry.getResourcePrimKey())>
 <#assign isSubscribedWiki = SubscriptionLocalService.isSubscribed(entry.getCompanyId(), themeDisplay.getUserId(), wikiNodeClassName, entry.getNodeId())>
 <#assign tags = AssetTagLocalService.getAssetEntryAssetTags(assetEntry.getEntryId())>
-<#assign categories = AssetCategoryLocalService.getAssetEntryAssetCategories(assetEntry.getEntryId())>
 <#assign modifierUser = UserLocalService.getUser(entry.getStatusByUserId())>
 <#assign assetRenderer = assetEntry.getAssetRenderer() />
 
@@ -145,13 +143,6 @@
 									</#list>
 								</li>
 							</#if>
-							<#if categories?has_content>
-								<li><span class="glyphicon glyphicon-tags"></span>
-									<#list categories as category>
-										<@displayCategory category=category/>
-									</#list>
-								</li>
-							</#if>
 						</ul>
 					</div>
 				</nav>					
@@ -199,8 +190,8 @@
 				</#if>
 			</div>
 		</div>
-		<div>
-			<input type="checkbox" name="sidebar" id="sidebar" class="sidebar-acc hidden"/> 
+		<div class="sidebar-button">
+			<input type="checkbox" name="sidebar" id="sidebar" class="hidden"/> 
 			<label class="sidebar-label" for="sidebar"></label>
 		</div>
 	</div>
@@ -442,17 +433,6 @@
 >
     <#assign author = contributor>
     <li>${author}</li>
-</#macro>
-
-<#macro displayCategory
-	category
->
-	<#assign categoryRenderURL = renderResponse.createRenderURL()>
-	${categoryRenderURL.setParameter("mvcRenderCommandName", "/wiki/view_categorized_pages")}
-	${categoryRenderURL.setParameter("nodeId", entry.getNodeId()?string)}
-	${categoryRenderURL.setParameter("categoryId", category.getCategoryId()?string)}
-
-	<a href="${categoryRenderURL}">${category.getName()}</a>
 </#macro>
 
 <#--   functions   -->
