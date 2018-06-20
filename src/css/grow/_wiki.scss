@@ -149,7 +149,7 @@
 					font-weight: 700;
 				}
 		
-				.wiki-actions, h6 {
+				.wiki-actions {
 					a {
 						color: $darkcolor;
 					}
@@ -157,6 +157,23 @@
 					.btn:hover, .btn:focus {
 						color: $lightcolor
 					}
+
+					.glyphicon-thumbs-down.rating-on {
+						color: #e60000;
+					} 
+
+					.glyphicon-thumbs-down.rating-on:hover {
+						color:  #fff;
+					} 
+
+					.glyphicon-thumbs-up.rating-on {
+						color: #339966;
+					} 
+
+					.glyphicon-thumbs-up.rating-on:hover {
+						color: #fff;
+					} 
+
 				}
 			
 				h4.text-default {
