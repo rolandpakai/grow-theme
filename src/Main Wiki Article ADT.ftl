@@ -29,7 +29,7 @@
 
 <#assign contributors = WikiHelperService.getWikiPageContributors(entry.getNodeId(), entry.getTitle())>
 <#assign contributorsList = JSONFactoryUtil.looseDeserialize(contributors.contributors)>
-<#assign creatorUser = contributors.creator>
+<#assign creatorUser = JSONFactoryUtil.looseDeserialize(contributors.creator)>
 <#assign parentPage = WikiHelperService.getParentWikiPage(entry.getNodeId(), entry.getTitle())>
 <#assign childPages = WikiHelperService.getChildWikiPages(entry.getNodeId(), entry.getTitle())>
 <#assign childPagesList = JSONFactoryUtil.looseDeserialize(childPages.childPages)>
@@ -103,19 +103,25 @@
 							</li>
 							<li>
 								<table class="contributors-table">
-									<tr>	
-										<td><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </td>
-										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
-									</tr>
-									<tr>
-										<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.userScreenName}">${creatorUser.userFullName}</a> (${creatorUser.count})</td>
-										<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${creatorUser.date?date}</td>
-									</tr>
+									<#if modifierUser?has_content>
+										<tr>	
+											<td><span class="glyphicon glyphicon-user"></span> Updated by <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + modifierUser.getScreenName()}">${modifierUser.getFullName()}</a> </td>
+											<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${assetEntry.getModifiedDate()?date}</li>	
+										</tr>
+									</#if>
+									<#if creatorUser?has_content>
+										<tr>
+											<td><span class="glyphicon glyphicon-user"></span> Creator: <a href="${portal.getPortalURL(httpServletRequest) + pubFriendlyURL + "/" + creatorUser.userScreenName}">${creatorUser.userFullName}</a> (${creatorUser.count})</td>
+											<td class="last-td"><span class="glyphicon glyphicon-calendar"> </span> ${contributors.creator.date?date}</td>
+										</tr>
+									</#if>
 								</table>	
 							</li>	
 							<#if contributorsList?size != 0>
 								<#list contributorsList as contributor>
-									<li><@displayContributorURL contributor /></li>
+									<#if contributor?has_content>
+										<li><@displayContributorURL contributor /></li>
+									</#if>
 								</#list>
 							</#if>
 							<li><@displayPageActivities/></li>
@@ -130,10 +136,10 @@
 						<ul class="list-unstyled">
 							<#if tags?has_content>
 							    <#if official?has_content>
-								<li>
-									<span class="glyphicon glyphicon-check"></span> 
-									<@displayTag tagName="official"/>
-								</li>
+									<li>
+										<span class="glyphicon glyphicon-check"></span> 
+										<@displayTag tagName="official"/>
+									</li>
 								</#if>
 								<li>
 									<span class="glyphicon glyphicon-tags"></span>
@@ -158,7 +164,9 @@
 							</#if>
 							<#if childPagesList?size != 0>
 								<#list childPagesList as childPage>
-									<li><@displayPageURL name=childPage.title glyphicon="triangle-bottom"/></li>
+									<#if childPage.title?has_content>	
+										<li><@displayPageURL name=childPage.title glyphicon="triangle-bottom"/></li>
+									</#if>
 								</#list>
 							</#if>
 							
@@ -168,7 +176,9 @@
 							
 							<#if linkedPagesList?size != 0>
 								<#list linkedPagesList as linkedPage>
-									<li><@displayPageURL name=linkedPage.title glyphicon="link"/></li>
+									<#if linkedPage.title?has_content>	
+										<li><@displayPageURL name=linkedPage.title glyphicon="link"/></li>
+									</#if>
 								</#list>
 							</#if>
 							
@@ -179,15 +189,15 @@
 					</div>
 				</nav>	
 				<#if entry.getAttachmentsFileEntriesCount() gt 0>
-				<nav class="a-items">
-					<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
-					<label for="attachments" class="accordion-label">Attachments</label>
-					<div class="sbox a-content">
-						<ul class="list-unstyled">
-							<@displayAttachmentAccordion />
-						</ul>
-					</div>
-				</nav>
+					<nav class="a-items">
+						<input type="checkbox" name="attachments" id="attachments" class="activate hidden"/>
+						<label for="attachments" class="accordion-label">Attachments</label>
+						<div class="sbox a-content">
+							<ul class="list-unstyled">
+								<@displayAttachmentAccordion />
+							</ul>
+						</div>
+					</nav>
 				</#if>
 			</div>
 		</div>
