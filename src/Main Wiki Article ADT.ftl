@@ -19,6 +19,7 @@
 		});
 	});
 </script>
+<#setting url_escaping_charset='UTF-8'>
 <#assign WikiHelperService = serviceLocator.findService("com.liferay.grow.wiki.helper.service.WikiHelperService")>
 <#assign JSONFactoryUtil = serviceLocator.findService("com.liferay.portal.kernel.json.JSONFactoryUtil")>
 <#assign TaskHandler = serviceLocator.findService("com.liferay.micro.maintainance.api.TaskHandler")>
@@ -343,7 +344,7 @@
 <#macro displayAttachmentAccordion>
 	<#assign attachments = entry.getAttachmentsFileEntries()>
 	<#list attachments as file>
-		<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName() + "/" + file.getUuid() + "?status=0&download=true">
+		<#assign downloadURL = portalURL + "/documents/portlet_file_entry/" + file.getGroupId() + "/" + file.getFileName()?url + "/" + file.getUuid() + "?status=0&download=true">
 		<#assign tooltip = "false">
 		<#assign title = file.getTitle()>
 		<#assign tooltipMsg = title>
