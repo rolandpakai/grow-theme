@@ -4,19 +4,12 @@ A Liferay theme for GROW based on _styled theme.
 
 ## Instructions
 
-After you call npm init in this project please add a "liferay-theme.json" with the following content:
-```
-{
-  "LiferayTheme": {
-    "appServerPath": "#liferay_path\\tomcat-8.0.32",
-    "deployPath": "#liferay_path\\deploy",
-    "url": "#liferay_url",
-    "appServerPathPlugin": "#theme_path\\grow-theme\\.web_bundle_build",
-    "deployed": true,
-    "pluginName": "grow-theme"
-  }
-} 
-```
+1. Install Gulp CLI globally on your computer using `npm install gulp-cli -g`
+2. Install all the dependencies to this theme with `npm install` after cloning
+3. Use `gulp init` to initialize your liferay-theme.json
+
+You can now use all [Liferay gulp tasks](https://dev.liferay.com/develop/reference/-/knowledge_base/7-0/theme-gulp-tasks), like `gulp deploy` to pack and deploy your theme.
+
 ## Release Notes
 
 ### 1.6.1
