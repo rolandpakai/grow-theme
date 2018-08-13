@@ -3,3 +3,4 @@ build
 dist
 liferay-theme.json
 .yo-rc.json
+*.war
