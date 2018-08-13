@@ -1,0 +1,18 @@
+sudo: false
+language: node_js
+node_js:
+- lts/*
+- node
+after_success:
+- npm run coveralls
+before_install:
+- npm install -g npm
+deploy:
+  provider: releases
+  api_key:
+    secure: tLYySvhlgK7sZyN+E0j/NR3vDNGZRyQ8SYoJgDoBhBg0ryzJys6rF0nbgBiNlZocaXxqROkPZraRf8fPkbx/IosdWpvsJRsmTtxwIRxtscgT34cyDsP5qo6FH5rZX5wURMrUtFmxzZJuPFZa30N0Yg5pJ0Wz3OQAUHGgu4vvuMXUyfVWcw0sDRzxsJOBJHVj7xB4Z658SilYwe1OggHTSOW2K6MkLdIceHt4nnDWPtZTcegShs+yxnw/0/c1bFME5Nttqxpww1InMBpU+bGFE0P1+ZbDW/ZBsl8bqHB7rDoLKhhV9i+cYsFeGM0HDdLF0JdzBLW1tsn5W64ods0BB/KiQb1p+GCoNPRWG5ev38PRneD27S+wt4Pl2blJPuRx2vX2gjY5cfNbe+iykx7+2c3U8UujQX7tr6ak1sPN0F2P9CY/EANiMMLgTdflsHjo2D6JjyT7XjnLOcTRaoVYNXf2SIdythiQzPGea7ESaahDDuZjjWdAbCIiYjHq8CX7syhqP6y5Em9Ae0paVibDTms1pwTmvhVbkQjwoHJYwYQb7HhS3M8MMA+hQDsL/fr86xgmddhSDazfYhWiHKl5mSv3/f/dESoY6p9mg1fxBIgslFZzsmiyaS1miuD+5hzkzPdsv/FYTbqYPJM/Ijy1VmvFMeVZQd6/LfHBMldNVQ0=
+  file: dist/grow-theme.war
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: balcsida/grow-theme
