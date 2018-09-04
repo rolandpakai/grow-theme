@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
+
 .portlet-wiki {
 	fieldset {
 		&.add-comment {
@@ -276,6 +278,36 @@
 				background: #272822;
 			}
 		}
+	}
+
+	.stackedit-button-wrapper {
+	  a {
+		color:#03a9f4;
+		font-size: 0.8em;
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+		  text-decoration: none;
+		}
+	  }
+
+	  img {
+		width: 1.6em;
+		height: 1.6em;
+		vertical-align: bottom;
+		margin-right: 0.33em;
+	  }
+	}
+
+	.main-content {
+	  h1, h2, h3, h4, h5, h6 {
+		color: #136a9e;
+	  }
+
+	  code {
+		font-family: 'Roboto Mono', monospace;
+	  }
 	}
 
 	.categories li {
