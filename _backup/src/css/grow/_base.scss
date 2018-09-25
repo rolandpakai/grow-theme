@@ -1,0 +1,28 @@
+h1, h2, h3, h4 {
+	p {
+		line-height: normal;
+	}
+}
+
+strong, b {
+	font-weight: bold;
+}
+
+#wrapper {
+	padding: 0;
+}
+
+.user-icon-default {
+	@include color-user-icon($skincolor);
+}
+
+.col-md-12 {
+	padding: 0 !important;
+}
+
+.col-md-12 {
+	@include sm {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}

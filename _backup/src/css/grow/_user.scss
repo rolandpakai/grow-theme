@@ -1,0 +1,63 @@
+@media (min-width: $screen-sm-min) {
+	.user-icon {
+		@include monospace(56px);
+
+		font-size: 32px;
+	}
+
+	.user-icon-lg {
+		@include monospace(72px);
+
+		font-size: 36px;
+	}
+}
+
+.user-personal-bar {
+	@include sm {
+		position: absolute;
+		right: 38px;
+		top: 0;
+	}
+
+	.panel-notifications-count {
+		top: 50%;
+
+		@include transform(translateY(-50%));
+
+		@include sm {
+			right: -25px;
+		}
+	}
+
+	.sign-in > a, .user-avatar-link {
+		display: block;
+	}
+
+	.sign-in > a {
+		line-height: 28px;
+		padding: 15px 4px;
+
+		@include sm {
+			padding: 18px 0;
+		}
+	}
+
+	.user-avatar-image {
+		display: inline-block;
+		vertical-align: text-bottom;
+		width: 32px;
+	}
+
+	.user-avatar-link {
+		line-height: 0;
+		padding: 18px 4px;
+
+		@include sm {
+			padding: 8px 0 8px 14px;
+		}
+	}
+
+	.icon-user, .user-full-name {
+		display: none;
+	}
+}

@@ -1,0 +1,17 @@
+.portlet-user-statistics {
+	.lfr-search-container {
+		margin-top: 0;
+
+		table, tbody > tr > td {
+			border: none;
+		}
+
+		.separator {
+			border-top: 1px dotted $skincolor;
+		}
+
+		.table-striped > tbody > tr:nth-of-type(odd) {
+			background-color: inherit;
+		}
+	}
+}
