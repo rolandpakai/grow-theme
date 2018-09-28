@@ -1,0 +1,25 @@
+.breadcrumb-wrap{
+    padding: 30px 0;
+    background-image:url(assan/images/shadow-bg.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #f6f6f6;
+    border-top: 1px solid #d2d3d4;
+    border-bottom: 1px solid #d2d3d4;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+.breadcrumb-wrap h4{
+    margin: 0px;
+    font-size:16px;
+    color: #333;
+    font-weight: 700;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: $primary-font;
+}
+
+.breadcrumb-wrap a{
+	color: #333
+}

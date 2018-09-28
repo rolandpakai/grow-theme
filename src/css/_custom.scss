@@ -1,14 +1,12 @@
 @import "fonts";
 
-@import "assan/style";
-@import "assan/revolution/css/settings.css";
-
 $primary-font:'Open Sans', sans-serif;
 
 @import "grow/_variables";
 @import "grow/_base";
 @import "grow/_container";
 @import "grow/_control_menu";
+@import "grow/_main_navigation_article";
 @import "grow/_portlet";
 @import "grow/_product_menu";
 @import "grow/_sidebar";
