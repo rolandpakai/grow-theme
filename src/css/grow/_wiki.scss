@@ -31,6 +31,11 @@
 		border-color: #ccc;
 	}
 
+	.btn-default:hover, .btn-default:focus {
+		background-color: #333;
+		border-color: #333;
+	}
+
 	.col-md-4.col-xs-12 {
 		display:none;
 	}
