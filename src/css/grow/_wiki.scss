@@ -47,35 +47,6 @@
 		border: none;
 	}
 
-	.owl-theme {
-		h3 {
-			font-size: 21px;
-
-			a:hover, a:focus {
-				color: $skincolor;
-				text-decoration: none;
-			}
-		}
-
-		.owl-controls {
-			margin-top: 10px;
-			text-align: right;
-			position: absolute;
-			right:20px;
-			bottom: 0px;
-
-			.owl-buttons {
-				div {
-					padding: 0px;
-					@include border-radius(0px);
-					background-color: transparent;
-					font-size: 30px;
-					color: $skincolor;
-				}
-			}
-		}
-	}
-
 	.navbar.navbar-default {
 		display: none;
 	}
