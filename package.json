@@ -9,21 +9,7 @@
 		"screenshot": "",
 		"rubySass": false,
 		"templateLanguage": "ftl",
-		"version": "7.1",
-		"themeletDependencies": {
-			"grow-banner-themelet": {
-				"liferayTheme": {
-					"screenshot": "",
-					"themelet": true,
-					"version": "7.0"
-				},
-				"name": "grow-banner-themelet",
-				"publishConfig": {
-					"tag": "7_0_x"
-				},
-				"version": "3.0.10"
-			}
-		}
+		"version": "7.1"
 	},
 	"devDependencies": {
 		"gulp": "^3.9.1",
