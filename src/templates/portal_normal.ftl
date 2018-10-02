@@ -3,100 +3,105 @@
 <#include init />
 
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
-	<head>
 
-		<!-- Google Tag Manager -->
-			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','GTM-P4GB7RG');</script>
-		<!-- End Google Tag Manager -->
+<head>
+	<title>${the_title} - ${company_name}</title>
 
-		<title>${the_title} - ${company_name}</title>
+	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
-		<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+	<@liferay_util["include"] page=top_head_include />
+</head>
 
-		<@liferay_util["include"] page=top_head_include />
+<body class="${css_class}">
 
-		<link rel="stylesheet" type="text/css" href="${javascript_folder}/prismjs/prism.css">
-	</head>
+<@liferay_ui["quick-access"] contentId="#main-content" />
 
-	<body class="${css_class}">
+<@liferay_util["include"] page=body_top_include />
 
-		<!-- Google Tag Manager (noscript) -->
-			<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4GB7RG"
-			height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+<@liferay.control_menu />
 
-		<@liferay_ui["quick-access"] contentId="#main-content" />
+<div class="pt-0" id="wrapper">
+	<#if show_header>
+		<header id="banner">
+			<div class="navbar navbar-classic navbar-top py-3">
+				<div class="container user-personal-bar">
+					<div class="align-items-center autofit-row">
+						<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_url}" title="<@liferay.language_format arguments="" key="go-to-x" />">
+							<img alt="${logo_description}" class="mr-2" height="56" src="${site_logo}" />
 
-		<@liferay_util["include"] page=body_top_include />
-
-		<@liferay.control_menu />
-
-		<div id="wrapper">
-			<header class="navbar navbar-default" id="banner" role="banner">
-				<div class="container">
-					<div class="navbar-header" id="heading">
-						<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-							<img alt="${logo_description}" height="64" src="${site_logo}" />
+							<#if show_site_name>
+								<h1 class="font-weight-bold h2 mb-0 text-dark">${site_name}</h1>
+							</#if>
 						</a>
 
-						<#if show_site_name>
-							<span class="site-name" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
-								${site_name}
-							</span>
-						</#if>
+						<#assign preferences = freeMarkerPortletPreferences.getPreferences({"portletSetupPortletDecoratorId": "barebone", "destination": "/search"}) />
 
-						<#if is_setup_complete>
-							<button aria-controls="navigation" aria-expanded="false" class="collapsed navbar-toggle" data-target="#navigationCollapse" data-toggle="collapse" type="button">
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
+						<div class="autofit-col autofit-col-expand">
+							<#if show_header_search>
+								<div class="justify-content-md-end mr-4 navbar-form" role="search">
+									<@liferay.search_bar default_preferences="${preferences}" />
+								</div>
+							</#if>
+						</div>
 
-							<div class="pull-right user-personal-bar">
-								<@liferay.user_personal_bar />
-							</div>
-						</#if>
-					</div>
-
-					<#include "${full_templates_path}/gsearch_navigation.ftl" />
-				</div>
-			</header>
-
-			<section class="container-fluid-1824" id="content">
-				<h1 class="hide-accessible">${the_title}</h1>
-
-				<#if selectable>
-					<@liferay_util["include"] page=content_include />
-				<#else>
-					${portletDisplay.recycle()}
-
-					${portletDisplay.setTitle(the_title)}
-
-					<@liferay_theme["wrap-portlet"] page="portlet.ftl">
-						<@liferay_util["include"] page=content_include />
-					</@>
-				</#if>
-			</section>
-
-			<footer id="footer" role="contentinfo">
-				<div class="container">
-					<div class="row">
-						<div class="footer-btm text-center">
-							<span>
-								<@liferay.language key="powered-by" /> <a href="http://www.liferay.com" rel="external">Liferay</a>
-							</span>
+						<div class="autofit-col">
+							<@liferay.user_personal_bar />
 						</div>
 					</div>
 				</div>
-			</footer>
-		</div>
+			</div>
 
-		<@liferay_util["include"] page=body_bottom_include />
-		<@liferay_util["include"] page=bottom_include />
-		<script type="text/javascript" src="${javascript_folder}/prismjs/prism.js"></script>
-	</body>
+			<div class="mb-4 navbar navbar-classic navbar-expand-md navbar-light pb-3">
+				<div class="container">
+					<a class="${logo_css_class} align-items-center d-inline-flex d-md-none logo-xs" href="${site_default_url}" rel="nofollow">
+						<img alt="${logo_description}" class="mr-2" height="56" src="${site_logo}" />
+
+						<#if show_site_name>
+							<h1 class="font-weight-bold h2 mb-0 text-dark">${site_name}</h1>
+						</#if>
+					</a>
+
+					<#include "${full_templates_path}/navigation.ftl" />
+				</div>
+			</div>
+		</header>
+	</#if>
+
+	<section class="${portal_content_css_class}" id="content">
+		<h1 class="sr-only">${the_title}</h1>
+
+		<#if selectable>
+			<@liferay_util["include"] page=content_include />
+		<#else>
+			${portletDisplay.recycle()}
+
+			${portletDisplay.setTitle(the_title)}
+
+			<@liferay_theme["wrap-portlet"] page="portlet.ftl">
+				<@liferay_util["include"] page=content_include />
+			</@>
+		</#if>
+	</section>
+
+	<#if show_footer>
+		<footer id="footer" role="contentinfo">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center text-md-left">
+						<@liferay.language key="powered-by" />
+
+						<a class="text-white" href="http://www.liferay.com" rel="external">Liferay</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</#if>
+</div>
+
+<@liferay_util["include"] page=body_bottom_include />
+
+<@liferay_util["include"] page=bottom_include />
+
+</body>
+
 </html>
