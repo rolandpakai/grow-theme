@@ -45,8 +45,8 @@
 			<div class="navbar navbar-classic navbar-top py-3">
 				<div class="container user-personal-bar">
 					<div class="align-items-center autofit-row">
-						<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_url}" title="<@liferay.language_format arguments="" key="go-to-x" />">
-							<img alt="${logo_description}" class="mr-2" height="60" src="${site_logo}" />
+						<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_url}"">
+							<img class="mr-2" height="60" src="${site_logo}" />
 
 							<#if show_site_name>
 								<h1 class="font-weight-bold h2 mb-0 text-dark">${site_name}</h1>
