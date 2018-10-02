@@ -42,15 +42,15 @@
 <div class="pt-0" id="wrapper">
 	<#if show_header>
 		<header id="banner">
-			<div class="navbar navbar-classic navbar-top py-3">
+			<div class="navbar navbar-classic py-1">
 				<div class="container-fluid user-personal-bar">
-					<div class="autofit-row d-flex justify-content-around">
+					<div class="autofit-row d-flex align-items-center justify-content-around">
 						<div>
-							<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_url}"">
+							<a class="${logo_css_class} align-items-center d-md-inline-flex " href="${site_default_url}"">
 								<img class="mr-2" height="60" src="${site_logo}" />
 
 								<#if show_site_name>
-									<h1 class="font-weight-bold h2 mb-0 text-dark">${site_name}</h1>
+									<h1 class="font-weight-bold h2 navbar-header mb-0">${site_name}</h1>
 								</#if>
 							</a>
 						</div>
