@@ -5,7 +5,6 @@
 <html class="${root_css_class}" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
 <head>
-	
 	<#if google_tag_manager>
 		<!-- Google Tag Manager -->
 			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -21,6 +20,8 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	<@liferay_util["include"] page=top_head_include />
+
+	<link rel="stylesheet" type="text/css" href="${javascript_folder}/prismjs/prism.css">
 </head>
 
 <body class="${css_class}">
@@ -119,6 +120,8 @@
 <@liferay_util["include"] page=body_bottom_include />
 
 <@liferay_util["include"] page=bottom_include />
+
+<script type="text/javascript" src="${javascript_folder}/prismjs/prism.js"></script>
 
 </body>
 
