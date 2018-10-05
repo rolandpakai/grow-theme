@@ -1,21 +1,17 @@
-.portlet-title-text {
+.portlet-layout .portlet .portlet-title-text {
 	color: #000;
 	font-family: $primary-font;
 	font-weight: 500;
 	font-size: 1.8em;
 	font-style: normal;
 	letter-spacing: normal;
-	line-height: 24px;
-	margin-bottom: 15px;
+	line-height: 3em;
+	margin-bottom: 2em;
 	max-width: 100%;
 	overflow: hidden;
-	padding-bottom: 10px;
+	padding-bottom: 1em;
 	position: relative;
 	text-transform: capitalize;
 	vertical-align: middle;
 	width: 100%;
-}
-
-.portlet-topper {
-	z-index: 1035;
 }
