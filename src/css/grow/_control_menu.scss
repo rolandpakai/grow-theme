@@ -1,20 +1,13 @@
-.control-menu {
-    background-image: linear-gradient(to right, #01579b, #b3e5fc) !important;
+.control-menu{
+background-image: linear-gradient(to right, #01579b, #b3e5fc) !important;
 }
 
-.control-menu-level-1 {
-	& > .container-fluid-1280 {
-		@media screen and (min-width: $grid-float-breakpoint) {
-			padding-bottom: 5px !important;
-			padding-top: 0px !important;
-		}
-	}
+.control-menu-level-1 > .container-fluid {
+    padding: 0.25rem !important;
+    line-height: 1.5rem;
 }
 
-.has-control-menu {
-	#wrapper {
-		@media screen and (min-width: $grid-float-breakpoint) {
-			margin-top: 40px !important;
-		}
-	}
+
+#wrapper {
+  margin-top: 2.5rem !important;
 }
