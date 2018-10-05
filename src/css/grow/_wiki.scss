@@ -1,14 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
 
 .portlet-wiki {
-	fieldset {
-		&.add-comment {
-			background-color: #b3e5fc;
-			padding: 20px 30px;
-			margin-bottom: 50px;
-		}
-	}
-
+	@import "comments";
+	
 	h4 {
 		&.text-default {
 			color: #060606;

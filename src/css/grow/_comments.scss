@@ -1,0 +1,17 @@
+fieldset {
+	&.add-comment {
+		background-color: #b3e5fc;
+		border: 1px solid;
+		padding: 20px 30px;
+		margin-bottom: 50px;
+	}
+}
+
+.panel-body{
+	background-color: $white;
+
+}
+
+.subscribe-link a {
+	color: $black
+}	
