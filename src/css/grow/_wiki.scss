@@ -187,20 +187,8 @@
 						color: $lightcolor
 					}
 
-					.glyphicon-thumbs-down.rating-on {
-						color: #ff4d4d;
-					} 
-
-					.glyphicon-thumbs-down.rating-on:hover {
-						color:  #fff;
-					} 
-
-					.glyphicon-thumbs-up.rating-on {
+					.rating-thumb-up.rating-on {
 						color: #00b359;
-					} 
-
-					.glyphicon-thumbs-up.rating-on:hover {
-						color: #fff;
 					} 
 				
 					position: fixed;
