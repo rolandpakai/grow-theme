@@ -127,33 +127,6 @@
 				h3 {
 					font-weight: 700;
 				}
-		
-				.wiki-actions {
-					a {
-						color: $darkcolor;
-					}
-		
-					.btn:hover, .btn:focus {
-						color: $lightcolor
-					}
-
-					.glyphicon-thumbs-down.rating-on {
-						color: #ff4d4d;
-					} 
-
-					.glyphicon-thumbs-down.rating-on:hover {
-						color:  #fff;
-					} 
-
-					.glyphicon-thumbs-up.rating-on {
-						color: #00b359;
-					} 
-
-					.glyphicon-thumbs-up.rating-on:hover {
-						color: #fff;
-					} 
-
-				}
 			
 				h4.text-default {
 					margin-left: 0
@@ -206,6 +179,30 @@
 				}
 	
 				.wiki-actions {
+					a {
+						color: $darkcolor;
+					}
+		
+					.btn:hover, .btn:focus {
+						color: $lightcolor
+					}
+
+					.glyphicon-thumbs-down.rating-on {
+						color: #ff4d4d;
+					} 
+
+					.glyphicon-thumbs-down.rating-on:hover {
+						color:  #fff;
+					} 
+
+					.glyphicon-thumbs-up.rating-on {
+						color: #00b359;
+					} 
+
+					.glyphicon-thumbs-up.rating-on:hover {
+						color: #fff;
+					} 
+				
 					position: fixed;
 			
 					margin-left: -45px;
