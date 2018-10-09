@@ -78,7 +78,7 @@
 		</header>
 	</#if>
 
-	<section class="${portal_content_css_class}" id="content">
+	<section class="${portal_content_css_class} container-fluid-1824" id="content">
 		<h1 class="sr-only">${the_title}</h1>
 
 		<#if selectable>
