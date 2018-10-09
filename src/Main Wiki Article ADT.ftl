@@ -11,15 +11,13 @@
 		}
 
 		$(".wiki-body #sidebar").click(function(){ 
-
 			if($("#sidebar").prop('checked')) {
-				$('.wiki-content').animate({width: "100%"}, {duration: 500});
-				$('.sidebar').animate({width: "toggle"}, {duration: 500});
+				$("#wiki-content-main").addClass("col-md-12");
+				$("#wiki-content-sidebar").hide();
 			} else {	
-				$('.wiki-content').animate({width: "75%"}, {duration: 500});
-				$('.sidebar').animate({width: "toggle"}, {duration: 500});
+				$("#wiki-content-main").removeClass("col-md-12");
+				$("#wiki-content-sidebar").show();
 			}
-
 		});
 	});
 </script>
@@ -67,7 +65,7 @@
 </#if>
 
 	<div class="row wiki-body">
-		<div class="col-md-9 wiki-content">
+		<div id="wiki-content-main" class="col-md-9 wiki-content px-3">
 			<div class="wiki-inner">
 				<div class="wiki-actions">
 					<ul class="list-unstyled">
@@ -91,7 +89,7 @@
 				${formattedContent}
 			</div>
 		</div>	
-		<div class="col-md-3 sidebar">
+		<div id="wiki-content-sidebar" class="col-md-3 sidebar pr-3">
 			<div class="sidebar-box">
 
 				<nav class="a-items">
