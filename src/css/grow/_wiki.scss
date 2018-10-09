@@ -3,12 +3,6 @@
 .portlet-wiki {
 	@import "comments";
 
-	.attachments.content {
-		> a, > div {
-			margin-left: 15px;
-		}
-	}
-
 	.col-md-4.col-xs-12 {
 		display:none;
 	}
