@@ -4,7 +4,11 @@
 	});
 	$(document).ready(function () {
 		$(".wiki-actions .rating-thumb-up").addClass("btn btn-default btn-block");
-		$(".wiki-actions .rating-thumb-down").addClass("btn btn-default btn-block");
+		$(".wiki-actions .rating-thumb-up").removeClass("btn-outline-borderless btn-outline-secondary btn-sm rating-thumb-up");
+
+		if ($(".wiki-actions .votes").text() >= 10) {
+			$(".wiki-actions .rating-element .inline-item").addClass("votes-padding");
+		}
 
 		$(".wiki-body #sidebar").click(function(){ 
 
@@ -72,7 +76,7 @@
 						<li><@displayAddChildLink/></li>
 						<li><@displayPageSubscription/></li>
 						<li><@displayPageDetails/></li>
-						<@getRatings/>
+						<li><@getRatings/></li>
 					</ul>
 				</div>
 				<h1 class="text-default">

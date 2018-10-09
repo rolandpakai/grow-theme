@@ -18,15 +18,6 @@
 			margin-left: 15px;
 		}
 	}
-	
-	.btn-default {
-		border-color: #ccc;
-	}
-
-	.btn-default:hover, .btn-default:focus {
-		background-color: #333;
-		border-color: #333;
-	}
 
 	.col-md-4.col-xs-12 {
 		display:none;
@@ -178,57 +169,51 @@
 					margin-top: -28px;
 				}
 	
-				.wiki-actions {
+				.wiki-actions {							
+					position: fixed;
+
+					margin-left: -4em;
+					margin-top: 1em;
+			
+					width: 2.8125em;
+					z-index: 1200;
+				
 					a {
 						color: $darkcolor;
 					}
+
+					.btn {
+						border-color: #ccc;
+						padding-left: 0.875em;
+					}
 		
-					.btn:hover, .btn:focus {
+					.btn:hover {
+						background-color: #333;
+						border-color: #333;
 						color: $lightcolor
 					}
 
-					.rating-thumb-up.rating-on {
-						color: #00b359;
-					} 
-				
-					position: fixed;
-			
-					margin-left: -45px;
-					margin-top: -375px;
-			
-					@include sm() {
-						margin-left: -60px;
-						margin-top: 5px;
+					.lexicon-icon {
+						height: 1.1875em;
 					}
-			
-					width: 45px;
-					z-index: 1200;
-			
+					
+					.rating-on {
+						color: #00b359;
+					}
+					
+					.inline-item.inline-item-before {
+						margin-right: 0.4375em;
+					}
+
+					.inline-item.inline-item-before.votes-padding {
+						margin-right: 0.25em;
+					}
+
 					.taglib-ratings {
 						.rating-element {
-							padding-right: 5px;
-			
-							&.rating-thumb-down {
-								margin-left: 0;
-							}
-			
-							&.btn-block {
-								margin: 0;
-							}
-			
-							&.glyphicon {
-								top: 0;
-							}
-			
-							&.btn {
-								font-size: 15px;
-							}
+							padding-left: 0.375em;
 						}
-			
-						&.like .thumbrating, &.thumbs .thumbrating {
-							margin: 0;
-						}
-			
+
 						.rating-off {
 							opacity: 1;
 						}
