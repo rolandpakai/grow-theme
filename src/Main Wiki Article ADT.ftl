@@ -11,13 +11,8 @@
 		}
 
 		$(".wiki-body #sidebar").click(function(){ 
-			if($("#sidebar").prop('checked')) {
-				$("#wiki-content-main").addClass("col-md-12");
-				$("#wiki-content-sidebar").hide();
-			} else {	
-				$("#wiki-content-main").removeClass("col-md-12");
-				$("#wiki-content-sidebar").show();
-			}
+			$("#wiki-content-main").toggleClass("col-md-12");
+			$("#wiki-content-sidebar").toggle();
 		});
 	});
 </script>
@@ -65,7 +60,7 @@
 </#if>
 
 	<div class="row wiki-body">
-		<div id="wiki-content-main" class="col-md-9 wiki-content px-3">
+		<div id="wiki-content-main" class="col-md-9 px-3">
 			<div class="wiki-inner">
 				<div class="wiki-actions">
 					<ul class="list-unstyled">
