@@ -65,7 +65,7 @@
 							</div>
 						</#if>
 						
-						<div>
+						<div class="navbar-expand-md navbar-light">
 							<#include "${full_templates_path}/navigation.ftl" />
 						</div>
 						

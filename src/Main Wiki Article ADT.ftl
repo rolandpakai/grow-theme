@@ -86,7 +86,9 @@
 					</#if>
 					${entry.getTitle()}
 				</h1>
-				${formattedContent}
+				<div>
+					${formattedContent}
+				</div>
 			</div>
 		</div>	
 		<div id="wiki-content-sidebar" class="col-md-3 sidebar pr-3">
@@ -205,10 +207,9 @@
 			<label class="sidebar-label" for="sidebar"></label>
 		</div>
 	</div>
-	<div class="comments content">
-		<h4 class="text-default">Comments</h4>
-		<@displayComments/>
-	</div>
+
+	<@displayComments />
+
 
 <#--   macros   -->
 
@@ -220,6 +221,35 @@
 	${editPageURL.setParameter("title", entry.getTitle()?trim)}
 
 	<a class="btn btn-default btn-block" data-toggle="tooltip" data-placement="right" title="Edit" data-animation="true" href="${editPageURL?string?trim}"><span class="glyphicon glyphicon-edit"> </span></a>
+</#macro>
+
+<#macro displayComments>
+<div id="wikiComments" class="px-3">
+	<@liferay_ui["panel-container"]
+		extended=false
+		markupView="lexicon"
+		persistState=true
+	>
+		<@liferay_ui["panel"]
+			collapsible=true
+			extended=true
+			id="wikiCommentsPanel"
+			markupView="lexicon"
+			persistState=true
+			title="comments"
+		>
+			<@liferay_comment["discussion"]
+				className=wikiPageClassName
+				classPK=entry.getResourcePrimKey()
+				formName="fm2"
+				ratingsEnabled=wikiPortletInstanceOverriddenConfiguration.enableCommentRatings()
+				redirect=currentURL
+				userId=assetRenderer.getUserId()
+			>
+			</@>
+		</@>
+	</@>
+</div>	
 </#macro>
 
 <#macro displayFriendlyURL
@@ -389,16 +419,33 @@
 </#macro>
 
 <#macro displayComments>
-	<@liferay_ui["discussion"]
-		className=wikiPageClassName
-		classPK=entry.getResourcePrimKey()
-		formAction="/c/portal/comment/edit_discussion"
-		formName="fm2"
-		ratingsEnabled=wikiPortletInstanceOverriddenConfiguration.enableCommentRatings()
-		redirect=currentURL
-		subject=entry.getTitle()
-		userId=assetRenderer.getUserId()
-	/>
+<div id="wikiComments" class="px-3">
+	<@liferay_ui["panel-container"]
+		extended=false
+		markupView="lexicon"
+		persistState=true
+	>
+		<@liferay_ui["panel"]
+			collapsible=true
+			extended=true
+			id="wikiCommentsPanel"
+			markupView="lexicon"
+			persistState=true
+			title="comments"
+		>
+			<@liferay_comment["discussion"]
+				className=wikiPageClassName
+				classPK=entry.getResourcePrimKey()
+				formName="fm2"
+				ratingsEnabled=wikiPortletInstanceOverriddenConfiguration.enableCommentRatings()
+				redirect=currentURL
+				userId=assetRenderer.getUserId()
+			>
+			</@>
+		</@>
+	</@>
+</div>	
+
 </#macro>
 
 <#macro displayWikiSubscription>

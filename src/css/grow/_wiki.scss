@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
 
+$wiki-actions-button-size: 2.8125em;
+
 .portlet-wiki {
-	@import "comments";
+	#wikiComments{
+		margin-left: 2.8125em;
+	}
 
 	.col-md-4.col-xs-12 {
 		display:none;
@@ -151,7 +155,7 @@
 					margin-left: -4em;
 					margin-top: 1em;
 			
-					width: 2.8125em;
+					width: $wiki-actions-button-size;
 					z-index: 1200;
 				
 					a {
