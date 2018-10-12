@@ -1,0 +1,79 @@
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+    color: #060606;
+    font-weight: 700;
+    margin: 0;
+    font-family: $primary-font;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 44px;
+    margin: 0 0 44px 0;
+}
+
+h2 {
+    font-size: 2.6em;
+    font-weight: 700;
+    line-height: 42px;
+    margin: 0 0 32px 0;
+}
+
+h3 {
+    font-size: 1.8em;
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: 24px;
+    margin-bottom: 15px;
+}
+/*use in section headings*/
+h3.heading{
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    position: relative;
+    text-transform: capitalize;
+    overflow: hidden;
+    vertical-align: middle;
+    font-family: $primary-font;
+}
+h3.heading:after{
+    position: relative;
+    left: 18px;
+    content: "";
+    display: inline-block;
+    width: 200%;
+    vertical-align: middle;
+    height: .50em;
+    margin: 0 -200% 0 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+h4 {
+    font-size: 1.4em;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 27px;
+    margin: 0 0 14px 0;
+}
+
+h5 {
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 18px;
+    margin: 0 0 14px 0;
+}
+
+h6 {
+    color: #333;
+    font-size: 1em;
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 18px;
+    margin: 0 0 14px 0;
+}

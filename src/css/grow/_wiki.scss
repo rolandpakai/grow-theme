@@ -3,6 +3,8 @@
 $wiki-actions-button-size: 2.8125em;
 
 .portlet-wiki {
+	@import "wiki_headings";
+
 	#wikiComments{
 		margin-left: 2.8125em;
 	}
@@ -186,7 +188,7 @@ $wiki-actions-button-size: 2.8125em;
 					}
 
 					.inline-item.inline-item-before.votes-padding {
-						margin-right: 0.25em;
+						margin-right: 0.1em;
 					}
 
 					.taglib-ratings {
