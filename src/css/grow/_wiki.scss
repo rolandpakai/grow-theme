@@ -6,6 +6,10 @@ $wiki-actions-button-size: 2.8125em;
 	@import "wiki_headings";
 	@import "wiki_navs";
 
+	.lfr-search-container-wrapper a {
+		color: $primary; 
+	}
+	
 	#wikiComments{
 		margin-left: 2.8125em;
 	}
