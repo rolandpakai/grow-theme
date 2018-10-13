@@ -86,7 +86,7 @@
 				</div>
 			</div>
 		</div>	
-		<div id="wiki-content-sidebar" class="col-md-3 sidebar pr-3">
+		<div id="wiki-content-sidebar" class="col-md-3 sidebar">
 			<div class="sidebar-box">
 
 				<nav class="a-items">
