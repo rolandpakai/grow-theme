@@ -4,6 +4,7 @@ $wiki-actions-button-size: 2.8125em;
 
 .portlet-wiki {
 	@import "wiki_headings";
+	@import "wiki_navs";
 
 	#wikiComments{
 		margin-left: 2.8125em;

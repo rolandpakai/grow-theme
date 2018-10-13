@@ -1,0 +1,42 @@
+/*tabs*/
+.nav-tabs{
+    border: 0px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    border:0px;
+    background-color: $skincolor;
+    color:#fff;
+}
+.nav-tabs>li>a{
+    @include border-radius (0px);
+    background-color: #f4f4f4;
+    border: 0px;
+}
+.nav-tabs>li>a:hover{
+    border: 0px;
+}
+
+.tabs .nav-tabs {
+    border-bottom: none;
+}
+.tabs .nav-tabs  li {
+    margin-bottom: 0;
+}
+.tab-content{
+    overflow: hidden;
+    padding: 15px 0;
+}
+/*****vertical left tabs--*****/
+.tabs-left{
+    .nav-tabs {
+        float: left;
+        margin-right: 19px;
+    }
+    .nav-tabs > li{
+        float: none;
+        margin-bottom: 2px;
+    }
+    .tab-content{
+        padding: 0px;
+    }
+}
