@@ -59,7 +59,7 @@
 	</#list>
 </#if>
 
-	<div class="row wiki-body">
+	<div class="row grow-wiki-body">
 		<div id="wiki-content-main" class="col-md-9 px-3">
 			<div class="wiki-inner">
 				<div class="wiki-actions">
