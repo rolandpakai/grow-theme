@@ -1,8 +1,7 @@
-@import "grow/wiki/_sidebar";
+@import "variables";
+@import "sidebar";
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
-
-$wiki-actions-button-size: 2.8125em;
 
 .portlet-wiki {
 	@import "wiki_headings";
