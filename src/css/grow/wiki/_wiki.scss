@@ -28,6 +28,7 @@
 .grow-wiki-body {
 	@import "sidebar";
 	@import "wiki_headings";
+	@import "wiki_content_main";
 
 	> h4 {
 		margin-left: 25px;
@@ -55,133 +56,6 @@
 
 	.sidebar {
 		margin-top: 110px !important; 
-	}
-
-	#wiki-content-main {
-		h1, h2, h3, h4, h5, h6 {
-			a {
-				color: $wiki-heading-color;
-			}
-
-			margin : 15px  0 10px 0;
-		}
-
-		h1 {
-			margin-top: 32px;
-			margin-bottom: 40px;
-
-			font-size: 3em;
-			font-weight: bold;
-		}
-
-		h2 {
-			margin-top : 24px;
-		}
-
-		h3 {
-			font-weight: 700;
-		}
-	
-		h4.text-default {
-			margin-left: 0
-		}
-
-		table {
-			border-color: transparent;
-		}
-
-		tbody {
-			tr {
-				border-bottom: 1px solid;
-			}
-
-			tr:nth-child(odd) {
-				background-color: $table-stripes-color;
-				text-align: center;
-			}
-		}
-
-		td {
-			border: none;
-			padding: $table-cells-padding;
-			text-align: left;
-			vertical-align: top;
-		}
-
-		th {
-			border: none !important;
-			font-size: 18px;
-			padding: $table-cells-padding;
-			text-align: center;
-		}
-
-		thead {
-			background:  transparent;
-
-			tr {
-				border-bottom: 2px solid;
-			}
-		}
-
-		tr {
-			text-align: center;
-		}
-
-		[id^="section-"] {
-			padding-top: 42px;
-			margin-top: -28px;
-		}
-
-	.wiki-actions {							
-			position: fixed;
-
-			margin-left: -4em;
-			margin-top: 1em;
-	
-			width: $wiki-actions-button-size;
-			z-index: 1200;
-		
-			a {
-				color: #01579b;
-			}
-
-			.btn {
-				border-color: #ccc;
-				padding-left: 0.875em;
-			}
-
-			.btn:hover {
-				background-color: #333;
-				border-color: #333;
-				color: $white;
-			}
-
-			.lexicon-icon {
-				height: 1.1875em;
-			}
-			
-			.rating-on {
-				color: #00b359;
-			}
-			
-			.inline-item.inline-item-before {
-				margin-right: 0.4375em;
-			}
-
-			.inline-item.inline-item-before.votes-padding {
-				margin-right: 0.1em;
-			}
-
-			.taglib-ratings {
-				.rating-element {
-					padding-left: 0.375em;
-				}
-
-				.rating-off {
-					opacity: 1;
-				}
-			}
-		}
 	}
 
 	pre[class*="language-"] {
