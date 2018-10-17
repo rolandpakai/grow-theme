@@ -23,60 +23,48 @@
 			margin-right: 0.33em;
 		}
 	}
-}
 
-.grow-wiki-body {
-	@import "sidebar";
-	@import "wiki_headings";
-	@import "wiki_content_main";
-
-	> h4 {
-		margin-left: 25px;
+	.grow-wiki-body {
+		@import "sidebar";
+		@import "wiki_headings";
+		@import "wiki_content_main";
 
 		@include sm() {
 			margin-left: 60px;
 		}
-	}
 
-	> div:last-child {
-		margin-left: 25px;
+		padding: 10px 0 10px $wiki-actions-button-size;
 
-		@include sm() {
-			margin-left: 60px;
+		ol, ul {
+			li {
+				color: $wiki-list-color
+			}
 		}
-	}
 
-	padding: 10px 0 10px 50px !important;
-
-	ol, ul {
-		li {
-			color: $wiki-list-color
+		.sidebar {
+			margin-top: 110px !important; 
 		}
-	}
 
-	.sidebar {
-		margin-top: 110px !important; 
-	}
+		pre[class*="language-"] {
+			background: #272822;
+		}
 
-	pre[class*="language-"] {
-		background: #272822;
-	}
+		.main-content {
+		  h1, h2, h3, h4, h5, h6 {
+			color: #136a9e;
+		  }
 
-	.main-content {
-	  h1, h2, h3, h4, h5, h6 {
-		color: #136a9e;
-	  }
+		  code {
+			font-family: 'Roboto Mono', monospace;
+		  }
+		}
 
-	  code {
-		font-family: 'Roboto Mono', monospace;
-	  }
-	}
+		.glyphicon {
+			padding-right: 5px;
+		}
 
-	.glyphicon {
-		padding-right: 5px;
-	}
-
-	.hidden {
-		display: none;
+		.hidden {
+			display: none;
+		}
 	}
 }
