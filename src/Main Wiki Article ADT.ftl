@@ -81,7 +81,7 @@
 					</#if>
 					${entry.getTitle()}
 				</h1>
-				<div>
+				<div class="markdown-body">
 					${formattedContent}
 				</div>
 			</div>
