@@ -8,10 +8,10 @@
 	}
 
 	#wikiComments{
-		margin-left: $wiki-actions-button-size;
+		margin-left: $wiki-actions-button-width;
 
 		@include sm() {
-			margin-left: $wiki-content-padding + $wiki-actions-button-size;
+			margin-left: $wiki-content-padding + $wiki-actions-button-width;
 		}
 	}
 
@@ -35,7 +35,7 @@
 			margin-left: $wiki-content-padding;
 		}
 
-		padding: 10px 0 10px $wiki-actions-button-size;
+		padding: 10px 0 10px $wiki-actions-button-width;
 
 		ol, ul {
 			li {
