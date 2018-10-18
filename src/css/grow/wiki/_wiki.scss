@@ -7,8 +7,8 @@
 	 * Defined in the Application Display Template
 	 */
 	.grow-wiki-body {
-		@import "wiki_sidebar";
 		@import "wiki_content_main";
+		@import "wiki_sidebar";
 
 		@include sm() {
 			margin-left: $wiki-content-padding;
