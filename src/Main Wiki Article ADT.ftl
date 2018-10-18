@@ -10,7 +10,7 @@
 			$(".wiki-actions .rating-element .inline-item").addClass("votes-padding");
 		}
 
-		$(".wiki-body #sidebar").click(function(){ 
+		$(".grow-wiki-body #sidebar").click(function(){ 
 			$("#wiki-content-main").toggleClass("col-md-12");
 			$("#wiki-content-sidebar").toggle();
 		});
