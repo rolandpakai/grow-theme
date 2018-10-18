@@ -3,32 +3,11 @@
 .portlet-wiki {
 	@import "wiki_navs";
 
-	.lfr-search-container-wrapper a {
-		color: $primary; 
-	}
-
-	#wikiComments{
-		margin-left: $wiki-actions-button-width;
-
-		@include sm() {
-			margin-left: $wiki-content-padding + $wiki-actions-button-width;
-		}
-	}
-
-	.stackedit-button-wrapper {
-		padding-top: 1em;
-
-		img {
-			width: 2.5em;
-			height: 2.5em;
-			vertical-align: middle;
-			margin-right: 0.33em;
-		}
-	}
-
+	/*
+	 * Defined in the Application Display Template
+	 */
 	.grow-wiki-body {
 		@import "wiki_sidebar";
-		@import "wiki_headings";
 		@import "wiki_content_main";
 
 		@include sm() {
@@ -43,8 +22,43 @@
 			}
 		}
 
+		/*
+		 * See the ADT
+		 */
 		.hidden {
 			display: none;
+		}
+	}
+
+	/*
+	 * Applied e.g. on the History tab
+	 */
+	.lfr-search-container-wrapper a {
+		color: $primary; 
+	}
+
+	/*
+	 * Comments section
+	 */
+	#wikiComments{
+		margin-left: $wiki-actions-button-width;
+
+		@include sm() {
+			margin-left: $wiki-content-padding + $wiki-actions-button-width;
+		}
+	}
+
+	/*
+	 * StackEdit: Applied on the edit view
+	 */
+	.stackedit-button-wrapper {
+		padding-top: 1em;
+
+		img {
+			width: 2.5em;
+			height: 2.5em;
+			vertical-align: middle;
+			margin-right: 0.33em;
 		}
 	}
 }
