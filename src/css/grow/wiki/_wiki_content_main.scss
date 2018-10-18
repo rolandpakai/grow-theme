@@ -1,5 +1,13 @@
 #wiki-content-main {
 	@import "../../primer/primer-markdown/index";
+
+	pre {
+	    border: 1px dashed #2F6FAB;
+		margin: 5px 0;
+		padding: 0.5em;
+	}
+
+	@import "prism";
 	
 	.wiki-actions {							
 		position: fixed;
