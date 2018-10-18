@@ -1,7 +1,5 @@
 @import "wiki_variables";
 
-@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
-
 .portlet-wiki {
 	@import "wiki_navs";
 
@@ -45,16 +43,6 @@
 		
 		pre[class*="language-"] {
 			background: #272822;
-		}
-
-		.main-content {
-		  h1, h2, h3, h4, h5, h6 {
-			color: #136a9e;
-		  }
-
-		  code {
-			font-family: 'Roboto Mono', monospace;
-		  }
 		}
 
 		.hidden {
