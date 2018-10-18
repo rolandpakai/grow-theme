@@ -1,4 +1,4 @@
-@import "variables";
+@import "wiki_variables";
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Mono');
 
@@ -25,7 +25,7 @@
 	}
 
 	.grow-wiki-body {
-		@import "sidebar";
+		@import "wiki_sidebar";
 		@import "wiki_headings";
 		@import "wiki_content_main";
 
@@ -40,11 +40,7 @@
 				color: $wiki-list-color
 			}
 		}
-
-		.sidebar {
-			margin-top: 110px !important; 
-		}
-
+		
 		pre[class*="language-"] {
 			background: #272822;
 		}
