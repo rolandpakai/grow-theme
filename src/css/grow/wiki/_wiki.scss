@@ -9,6 +9,10 @@
 
 	#wikiComments{
 		margin-left: $wiki-actions-button-size;
+
+		@include sm() {
+			margin-left: $wiki-content-padding + $wiki-actions-button-size;
+		}
 	}
 
 	.stackedit-button-wrapper {
@@ -28,7 +32,7 @@
 		@import "wiki_content_main";
 
 		@include sm() {
-			margin-left: 60px;
+			margin-left: $wiki-content-padding;
 		}
 
 		padding: 10px 0 10px $wiki-actions-button-size;
