@@ -72,7 +72,7 @@
 						<li><@getRatings/></li>
 					</ul>
 				</div>
-				<h1 class="text-default">
+				<div class="wiki-title">
 					<#if official?has_content>
 						<span class="">
 							<i class="icon-check"></i>
@@ -80,7 +80,7 @@
 						</span>
 					</#if>
 					${entry.getTitle()}
-				</h1>
+				</div>
 				<div class="markdown-body">
 					${formattedContent}
 				</div>
