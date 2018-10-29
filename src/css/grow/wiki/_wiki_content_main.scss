@@ -7,6 +7,10 @@
 		padding: 0.5em;
 	}
 
+	pre[class*="language-"] {
+		background: #272822;
+	}
+
 	@import "prism";
 	
 	.wiki-actions {							
