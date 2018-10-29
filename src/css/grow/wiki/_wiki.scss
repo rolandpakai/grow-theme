@@ -1,6 +1,7 @@
 @import "wiki_variables";
 
 .portlet-wiki {
+	@import "wiki_html_creole.scss";
 	@import "wiki_navs";
 
 	.wiki-title {
