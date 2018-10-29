@@ -51,6 +51,12 @@
 	<#assign parentTitle = entry.getParentPage().getTitle()>
 </#if>
 
+<#if entry.getFormat() == "markdown">
+	<#assign CSS = "markdown-body">
+<#else>
+	<#assign CSS = "html-creole-body">
+</#if>
+
 <#if tags?has_content>
 	<#list tags as tag>
 		<#if tag.name?matches("official", "i")>
@@ -81,7 +87,7 @@
 					</#if>
 					${entry.getTitle()}
 				</div>
-				<div class="markdown-body">
+				<div class="${CSS}">
 					${formattedContent}
 				</div>
 			</div>
