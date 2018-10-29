@@ -26,31 +26,7 @@ h3 {
     line-height: 19px;
     margin-bottom: 12px;
 }
-/*use in section headings*/
-h3.heading{
-    color: #000;
-    font-size: 16px;
-    font-weight: 600;
-    font-style: normal;
-    margin: 0 0 16px;
-    padding-bottom: 8px;
-    position: relative;
-    text-transform: capitalize;
-    overflow: hidden;
-    vertical-align: middle;
-}
-h3.heading:after{
-    position: relative;
-    left: 18px;
-    content: "";
-    display: inline-block;
-    width: 160%;
-    vertical-align: middle;
-    height: .40em;
-    margin: 0 -160% 0 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-}
+
 h4 {
     font-size: 1.12em;
     font-weight: 700;
