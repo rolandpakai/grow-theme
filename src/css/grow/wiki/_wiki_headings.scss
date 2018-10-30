@@ -3,6 +3,7 @@
 h1, h2, h3, h4, h5, h6 {
     color: #060606;
     font-weight: 700;
+	letter-spacing: 0.5px;
 
 	a {
 		color: $wiki-heading-color;
@@ -12,10 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    line-height: 35px;
+    line-height: 44px;
 
-	margin-top: 25.6px;
-	margin-bottom: 32px;
+	margin-top: 32px;
+	margin-bottom: 40px;
 
 	font-size: 2.4em;
 	font-weight: 700;
@@ -23,26 +24,26 @@ h1 {
 
 h2 {
     font-size: 2.08em;
-    line-height: 34px;
+    line-height: 38px;
 	margin-top : 19.2px;
 }
 
 h3 {
     font-size: 1.44em;
-    line-height: 19px;
+    line-height: 32px;
 }
 
 h4 {
     font-size: 1.12em;
-    line-height: 21.6px;
+    line-height: 26px;
 }
 
 h5 {
     font-size: 1em;
-    line-height: 18px;
+    line-height: 20px;
 }
 
 h6 {
     color: #333;
-    line-height: 18px;
+    line-height: 20px;
 }
