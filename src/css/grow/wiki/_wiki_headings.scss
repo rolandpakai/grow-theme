@@ -15,35 +15,44 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     line-height: 44px;
 
-	margin-top: 32px;
-	margin-bottom: 40px;
+	margin-top: 72px;
+	margin-bottom: 24px;
 
-	font-size: 2.4em;
-	font-weight: 700;
+	font-size: 2.6em;
 }
 
 h2 {
-    font-size: 2.08em;
+    font-size: 2.3em;
     line-height: 38px;
-	margin-top : 19.2px;
+	margin-top: 65px;
+	margin-bottom: 22px;
 }
 
 h3 {
-    font-size: 1.44em;
+    font-size: 1.6em;
     line-height: 32px;
+	margin-top: 58.5px;
+	margin-bottom: 19px;
 }
 
 h4 {
-    font-size: 1.12em;
+    font-size: 1.3em;
     line-height: 26px;
+	margin-top: 52px;
+	margin-bottom: 16px;
 }
 
 h5 {
-    font-size: 1em;
+    font-size: 1.2em;
     line-height: 20px;
+	margin-top: 46px;
+	margin-bottom: 14px;
 }
 
 h6 {
+	font-size: 1.2em;
     color: #333;
     line-height: 20px;
+	margin-top: 46px;
+	margin-bottom: 14px;
 }
