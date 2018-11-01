@@ -67,6 +67,10 @@
 							<#include "${full_templates_path}/navigation.ftl" />
 						</div>
 						
+						<div class="liferay-gsearch-mini">
+							<#include "${full_templates_path}/gsearch_search.ftl" />
+						</div>
+						
 						<div class="autofit-col">
 							<@liferay.user_personal_bar />
 						</div>
