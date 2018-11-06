@@ -17,3 +17,11 @@ hr {
 		min-width: 0;
 	}
 }
+
+.portlet-activities, .portlet-user-statistics {
+	.portlet .portlet-content .portlet-title-text {
+		margin-bottom: 0;
+		padding-bottom: 0;
+		font-weight: 400;
+	}
+}
