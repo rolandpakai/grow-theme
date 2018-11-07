@@ -1,13 +1,19 @@
 /* Headings */
 
 h1, h2, h3, h4, h5, h6 {
+	a {
+		all: inherit;
+	    cursor: pointer;
+	}
+	
+	&::before {
+		all: initial;
+		height: 26px;
+	}
+
     color: #060606;
     font-weight: 700;
 	letter-spacing: 0.5px;
-
-	a {
-		color: $wiki-heading-color;
-	}
 	
 	margin : 12px  0 8px 0;
 }
