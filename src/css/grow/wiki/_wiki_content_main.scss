@@ -1,4 +1,7 @@
 #wiki-content-main {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+
 	@import "../../primer/primer-markdown/index";
 
 	pre {
