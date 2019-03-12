@@ -23,8 +23,8 @@
 	<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")> 
 	<#assign siteFriendlyURL = themeDisplay.getSiteGroup().getFriendlyURL()>
 
-	<#if name == "Welcome">
-		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name}
+	<#if (name?lower_case == "welcome") || (name?lower_case == "questions and answers")>
+		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name?replace(" ", "-")}
 	<#else>
 		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name}/-/wiki/Grow/${name?replace(" ", "+")}
 	</#if>
