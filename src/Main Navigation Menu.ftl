@@ -23,9 +23,9 @@
 	<#assign privateFriendlyURL = prefsPropsUtil.getString(companyId, "layout.friendly.url.private.group.servlet.mapping")> 
 	<#assign siteFriendlyURL = themeDisplay.getSiteGroup().getFriendlyURL()>
 
-	<#if (name?lower_case == "welcome") || (name?lower_case == "questions and answers")>
-		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name?replace(" ", "-")}
-	<#else>
+	<#if (name?lower_case == "people") || (name?lower_case == "learn") || (name?lower_case == "excellence") || (name?lower_case == "share")>
 		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name}/-/wiki/Grow/${name?replace(" ", "+")}
+	<#else>
+		${portalURL}${privateFriendlyURL}${siteFriendlyURL}/${name?replace(" ", "+")}
 	</#if>
 </#macro>
