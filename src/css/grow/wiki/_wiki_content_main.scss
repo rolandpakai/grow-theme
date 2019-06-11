@@ -18,54 +18,54 @@
 
 	@import "prism";
 	
-	.wiki-actions {							
-		position: fixed;
-
-		margin-left: -4em;
-		margin-top: 1em;
-
-		width: $wiki-actions-button-width;
-		z-index: 1200;
+	.wiki-author-details {
 	
-		a {
-			color: #01579b;
-		}
-
-		.btn {
-			border-color: #ccc;
-			padding-left: 0.875em;
-		}
-
-		.btn:hover {
-			background-color: #333;
-			border-color: #333;
-			color: $white;
-		}
-
-		.lexicon-icon {
-			height: 1.1875em;
+		ul {
+		    display: inline-flex;
 		}
 		
-		.rating-on {
-			color: #00b359;
+		ul > li {
+			padding-right: 0.5rem;
+			color: #647480 !important;
 		}
-		
-		.inline-item.inline-item-before {
-			margin-right: 0.4375em;
-		}
-
-		.inline-item.inline-item-before.votes-padding {
-			margin-right: 0.1em;
-		}
-
-		.taglib-ratings {
-			.rating-element {
-				padding-left: 0.375em;
-			}
-
-			.rating-off {
-				opacity: 1;
-			}
-		}
+	
 	}
+
+	.wiki-header-toolbar {
+	
+		padding-top: 1rem;	
+		padding-bottom: 1.5rem;	
+		display: inline-flex;
+		margin-left: -0.8rem;
+		
+		.lexicon-icon-pencil, .lexicon-icon-link, .lexicon-icon-info-circle, .pages-tree {
+			fill: #0B63CE;
+		}
+	
+	}
+	
+	.wiki-footer-toolbar {
+	
+		padding-top: 1rem;	
+		padding-bottom: 2rem;	
+		display: inline-flex;
+		
+		.lexicon-icon-star-o, .lexicon-icon-star {
+			fill: #ffdf00;
+		}
+		
+		.thumbs-up-liked {
+			fill: #0B63CE;
+		}
+		
+		.lexicon-icon-thumbs-up {
+			fill: #B3CDFF;
+		}
+		
+		.lexicon-icon-flag-full, lexicon-icon-flag-empty {
+			fill: #0B63CE;
+		}
+	
+	}
+	
 }
