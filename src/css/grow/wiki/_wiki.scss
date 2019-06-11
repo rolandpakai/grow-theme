@@ -3,6 +3,20 @@
 .portlet-wiki {
 	@import "wiki_html_creole.scss";
 	@import "wiki_navs";
+	
+	a, a:hover  {
+		color: $wiki-link-color !important;
+		text-decoration: none !important;
+		
+	}
+	
+	.label {
+		border: 1px solid #89A7E0 !important;
+	}
+	
+	.label a, .label a:hover {
+		text-decoration: none !important;
+	}
 
 	ol,ul {
 		margin-bottom: 1.5em;
@@ -13,14 +27,13 @@
 	}
 
 	.wiki-title {
-		color: #333;
+		color: #09101D;
 		font-size: 3.2em;
 		font-weight: 700;
 		
 		line-height: 44px;
 
-		margin-top: 32px;
-		margin-bottom: 40px;
+		margin-bottom: 32px;
 	}
 	
 	/*
@@ -57,16 +70,6 @@
 		color: $primary; 
 	}
 
-	/*
-	 * Comments section
-	 */
-	#wikiComments{
-		margin-left: $wiki-actions-button-width;
-
-		@include sm() {
-			margin-left: $wiki-content-padding + $wiki-actions-button-width;
-		}
-	}
 
 	/*
 	 * StackEdit: Applied on the edit view
